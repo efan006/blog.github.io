@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="https://efan006.github.io">
+  <title>Retrofit+RxJava实战日志(3)-网络异常处理 | 易凡的技术园地</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="上一篇文章写了Retrofit和RxJava的基本使用，最后的subscriber并没有写具体实现成功的返回通常对应了各种不同的处理，而异常返回通常有着统一的处理因此这一篇单独讲讲异常处理
+Retrofit本身会抛出HttpException，Gson解析会抛出解析异常，此外我们还应该处理与服务器约定好的“异常”，即上一篇提到的返回数据中result字段值不会0的情况
+这里要先解决一个问题，就是G">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Retrofit+RxJava实战日志(3)-网络异常处理">
+<meta property="og:url" content="https://efan006.github.io/2016/01/19/Retrofit+RxJava实战日志(3)-网络异常处理/index.html">
+<meta property="og:site_name" content="易凡的技术园地">
+<meta property="og:description" content="上一篇文章写了Retrofit和RxJava的基本使用，最后的subscriber并没有写具体实现成功的返回通常对应了各种不同的处理，而异常返回通常有着统一的处理因此这一篇单独讲讲异常处理
+Retrofit本身会抛出HttpException，Gson解析会抛出解析异常，此外我们还应该处理与服务器约定好的“异常”，即上一篇提到的返回数据中result字段值不会0的情况
+这里要先解决一个问题，就是G">
+<meta property="og:updated_time" content="2016-11-29T14:50:36.320Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Retrofit+RxJava实战日志(3)-网络异常处理">
+<meta name="twitter:description" content="上一篇文章写了Retrofit和RxJava的基本使用，最后的subscriber并没有写具体实现成功的返回通常对应了各种不同的处理，而异常返回通常有着统一的处理因此这一篇单独讲讲异常处理
+Retrofit本身会抛出HttpException，Gson解析会抛出解析异常，此外我们还应该处理与服务器约定好的“异常”，即上一篇提到的返回数据中result字段值不会0的情况
+这里要先解决一个问题，就是G">
+  
+    <link rel="alternative" href="/atom.xml" title="易凡的技术园地" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://avatar.csdn.net/1/5/6/1_efan006.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">易凡</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">时间无言，却证明一切</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/efan006" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="https://weibo.com/efan006" title="weibo">weibo</a>
+		        
+					<a class="douban" target="_blank" href="https://www.douban.com/people/46017307/" title="douban">douban</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">易凡</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://avatar.csdn.net/1/5/6/1_efan006.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">易凡</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">时间无言，却证明一切</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/efan006" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="https://weibo.com/efan006" title="weibo">weibo</a>
+			        
+						<a class="douban" target="_blank" href="https://www.douban.com/people/46017307/" title="douban">douban</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Retrofit+RxJava实战日志(3)-网络异常处理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Retrofit+RxJava实战日志(3)-网络异常处理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上一篇文章写了Retrofit和RxJava的基本使用，最后的subscriber并没有写具体实现<br>成功的返回通常对应了各种不同的处理，而异常返回通常有着统一的处理<br>因此这一篇单独讲讲异常处理</p>
+<p>Retrofit本身会抛出HttpException，Gson解析会抛出解析异常，<br>此外我们还应该处理与服务器约定好的“异常”，即上一篇提到的返回数据中result字段值不会0的情况</p>
+<p>这里要先解决一个问题，就是Gson构建的对象，通过注解定义key名，以变量的类型定value的类型，<br>但如果同样的key在不同情况下属于不同的数据类型，就会出问题。<br>比如上一篇文章提及，服务器返回格式是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;result&quot;:&quot;结果代号，0表示成功&quot;,</div><div class="line">    &quot;msg&quot;:&quot;成功返回时是消息数据列表，失败时是异常消息文本&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>那么msg究竟应该定义为String，还是一个List呢</p>
+<a id="more"></a>
+<p>我找到的解决方法就是：<br>注册一个自定义的转换类GsonResponseBodyConverter<br>先用一个只含result变量的Model类去解析获得result值<br>如果失败，则用msg是String的Model类再去解析msg值，然后组成一个ResultException<br>如果成功，则按照原本的Model类解析<br>代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">GsonResponseBodyConverter</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">Converter</span>&lt;<span class="title">ResponseBody</span>, <span class="title">T</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Gson gson;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Type type;</div><div class="line"></div><div class="line">    GsonResponseBodyConverter(Gson gson, Type type) &#123;</div><div class="line">        <span class="keyword">this</span>.gson = gson;</div><div class="line">        <span class="keyword">this</span>.type = type;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">convert</span><span class="params">(ResponseBody value)</span> <span class="keyword">throws</span> IOException</span>&#123;</div><div class="line">        String response = value.string();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Log.d(<span class="string">"Network"</span>, <span class="string">"response&gt;&gt;"</span> + response);</div><div class="line">            <span class="comment">//ResultResponse 只解析result字段</span></div><div class="line">            ResultResponse resultResponse = gson.fromJson(response, ResultResponse.class);</div><div class="line">            <span class="keyword">if</span> (resultResponse.getResult() == <span class="number">0</span>)&#123;</div><div class="line">	            <span class="comment">//result==0表示成功返回，继续用本来的Model类解析</span></div><div class="line">                <span class="keyword">return</span> gson.fromJson(response, type);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">	            <span class="comment">//ErrResponse 将msg解析为异常消息文本</span></div><div class="line">                ErrResponse errResponse = gson.fromJson(response, ErrResponse.class);</div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> ResultException(resultResponse.getResult(), errResponse.getMsg());</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个类用于捕获服务器约定的错误类型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ResultException</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> errCode = <span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ResultException</span><span class="params">(<span class="keyword">int</span> errCode, String msg)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>(msg);</div><div class="line">		<span class="keyword">this</span>.errCode = errCode;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getErrCode</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> errCode;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>拷贝原生的ResponseConverterFactory，将GsonResponseBodyConverter替换为前面我们自定义的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ResponseConverterFactory</span> <span class="keyword">extends</span> <span class="title">Converter</span>.<span class="title">Factory</span> </span>&#123;</div><div class="line"></div><div class="line">    ...</div><div class="line">    ...</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> Converter&lt;ResponseBody, ?&gt; fromResponseBody(Type type, Annotation[] annotations) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> GsonResponseBodyConverter&lt;&gt;(gson, type);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> Converter&lt;?, RequestBody&gt; toRequestBody(Type type, Annotation[] annotations) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> GsonRequestBodyConverter&lt;&gt;(gson, type);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后在构建Retrofit时注册这个工厂类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Retrofit = <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">                .baseUrl(API_SERVER + <span class="string">"/"</span>)</div><div class="line">                <span class="comment">//注册自定义的工厂类</span></div><div class="line">                .addConverterFactory(ResponseConverterFactory.create())</div><div class="line">                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())</div><div class="line">                .client(mOkHttpClient)</div><div class="line">                .build();</div></pre></td></tr></table></figure>
+<p>这样就完成了Retrofit也可以抛出服务器约定异常</p>
+<p>然后就是具体的处理：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbsAPICallback</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">Subscriber</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">//对应HTTP的状态码</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> UNAUTHORIZED = <span class="number">401</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> FORBIDDEN = <span class="number">403</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> NOT_FOUND = <span class="number">404</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> REQUEST_TIMEOUT = <span class="number">408</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INTERNAL_SERVER_ERROR = <span class="number">500</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> BAD_GATEWAY = <span class="number">502</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SERVICE_UNAVAILABLE = <span class="number">503</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> GATEWAY_TIMEOUT = <span class="number">504</span>;</div><div class="line">	<span class="comment">//出错提示</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String networkMsg;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String parseMsg;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String unknownMsg;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">AbsAPICallback</span><span class="params">(String networkMsg, String parseMsg, String unknownMsg)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.networkMsg = networkMsg;</div><div class="line">        <span class="keyword">this</span>.parseMsg = parseMsg;</div><div class="line">        <span class="keyword">this</span>.unknownMsg = unknownMsg;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable e)</span> </span>&#123;</div><div class="line">        Throwable throwable = e;</div><div class="line">        <span class="comment">//获取最根源的异常</span></div><div class="line">        <span class="keyword">while</span>(throwable.getCause() != <span class="keyword">null</span>)&#123;</div><div class="line">            e = throwable;</div><div class="line">            throwable = throwable.getCause();</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        ApiException ex;</div><div class="line">        <span class="keyword">if</span> (e <span class="keyword">instanceof</span> HttpException)&#123;             <span class="comment">//HTTP错误</span></div><div class="line">            HttpException httpException = (HttpException) e;</div><div class="line">            ex = <span class="keyword">new</span> ApiException(e, httpException.code());</div><div class="line">            <span class="keyword">switch</span>(httpException.code())&#123;</div><div class="line">                <span class="keyword">case</span> UNAUTHORIZED:</div><div class="line">                <span class="keyword">case</span> FORBIDDEN:</div><div class="line">                    onPermissionError(ex);          <span class="comment">//权限错误，需要实现</span></div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> NOT_FOUND:</div><div class="line">                <span class="keyword">case</span> REQUEST_TIMEOUT:</div><div class="line">                <span class="keyword">case</span> GATEWAY_TIMEOUT:</div><div class="line">                <span class="keyword">case</span> INTERNAL_SERVER_ERROR:</div><div class="line">                <span class="keyword">case</span> BAD_GATEWAY:</div><div class="line">                <span class="keyword">case</span> SERVICE_UNAVAILABLE:</div><div class="line">                <span class="keyword">default</span>:</div><div class="line">                    ex.setDisplayMessage(networkMsg);  <span class="comment">//均视为网络错误</span></div><div class="line">                    onError(ex);</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (e <span class="keyword">instanceof</span> ResultException)&#123;    <span class="comment">//服务器返回的错误</span></div><div class="line">            ResultException resultException = (ResultException) e;</div><div class="line">            ex = <span class="keyword">new</span> ApiException(resultException, resultException.getErrCode());               </div><div class="line">            onResultError(ex);  </div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (e <span class="keyword">instanceof</span> JsonParseException</div><div class="line">                || e <span class="keyword">instanceof</span> JSONException</div><div class="line">                || e <span class="keyword">instanceof</span> ParseException)&#123;</div><div class="line">            ex = <span class="keyword">new</span> ApiException(e, ApiException.PARSE_ERROR);</div><div class="line">            ex.setDisplayMessage(parseMsg);            <span class="comment">//均视为解析错误</span></div><div class="line">            onError(ex);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            ex = <span class="keyword">new</span> ApiException(e, ApiException.UNKNOWN);</div><div class="line">            ex.setDisplayMessage(unknownMsg);          <span class="comment">//未知错误</span></div><div class="line">            onError(ex);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 错误回调</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(ApiException ex)</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 权限错误，需要实现重新登录操作</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">onPermissionError</span><span class="params">(ApiException ex)</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 服务器返回的错误</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">onResultError</span><span class="params">(ApiException ex)</span></span>;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCompleted</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>自定义ApiException，携带了异常代码和信息，以及根源Throwable，足够调用者需要</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApiException</span> <span class="keyword">extends</span> <span class="title">Exception</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> code;</div><div class="line">    <span class="keyword">private</span> String displayMessage;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> UNKNOWN = <span class="number">1000</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PARSE_ERROR = <span class="number">1001</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ApiException</span><span class="params">(Throwable throwable, <span class="keyword">int</span> code)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(throwable);</div><div class="line">        <span class="keyword">this</span>.code = code;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCode</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> code;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDisplayMessage</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> displayMessage;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDisplayMessage</span><span class="params">(String msg)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.displayMessage = msg + <span class="string">"(code:"</span> + code + <span class="string">")"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/01/19/Retrofit+RxJava实战日志(3)-网络异常处理/" class="archive-article-date">
+  	<time datetime="2016-01-19T10:13:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Retrofit/">Retrofit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/01/19/Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/19/Retrofit+RxJava实战日志(2)-基本使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Retrofit+RxJava实战日志(2)-基本使用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 易凡
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Retrofit/" style="font-size: 15px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 20px;">RxJava</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/序列化/" style="font-size: 10px;">序列化</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

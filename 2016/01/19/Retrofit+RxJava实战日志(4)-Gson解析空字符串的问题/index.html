@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="https://efan006.github.io">
+  <title>Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题 | 易凡的技术园地</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在我做的项目中，服务器经常会用空字符串 “” 作为返回结果表示空值但这在Gson当中就会遇到问题，如果这项数据的类型不是字符串，Gson解析就会报错我们希望程序可以自动将空字符串解析为对应类型的空值，比如整型就解析为0，List型就解析为一个Empty List
+这个问题可以说是我用Retrofit+Gson以来最大的一个坑，以至于我在研究时差不多都要把源码看完了
+
+提一件离奇的事是，Gson在用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题">
+<meta property="og:url" content="https://efan006.github.io/2016/01/19/Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题/index.html">
+<meta property="og:site_name" content="易凡的技术园地">
+<meta property="og:description" content="在我做的项目中，服务器经常会用空字符串 “” 作为返回结果表示空值但这在Gson当中就会遇到问题，如果这项数据的类型不是字符串，Gson解析就会报错我们希望程序可以自动将空字符串解析为对应类型的空值，比如整型就解析为0，List型就解析为一个Empty List
+这个问题可以说是我用Retrofit+Gson以来最大的一个坑，以至于我在研究时差不多都要把源码看完了
+
+提一件离奇的事是，Gson在用">
+<meta property="og:updated_time" content="2016-11-29T14:50:08.160Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题">
+<meta name="twitter:description" content="在我做的项目中，服务器经常会用空字符串 “” 作为返回结果表示空值但这在Gson当中就会遇到问题，如果这项数据的类型不是字符串，Gson解析就会报错我们希望程序可以自动将空字符串解析为对应类型的空值，比如整型就解析为0，List型就解析为一个Empty List
+这个问题可以说是我用Retrofit+Gson以来最大的一个坑，以至于我在研究时差不多都要把源码看完了
+
+提一件离奇的事是，Gson在用">
+  
+    <link rel="alternative" href="/atom.xml" title="易凡的技术园地" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://avatar.csdn.net/1/5/6/1_efan006.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">易凡</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">时间无言，却证明一切</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/efan006" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="https://weibo.com/efan006" title="weibo">weibo</a>
+		        
+					<a class="douban" target="_blank" href="https://www.douban.com/people/46017307/" title="douban">douban</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">易凡</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://avatar.csdn.net/1/5/6/1_efan006.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">易凡</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">时间无言，却证明一切</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/efan006" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="https://weibo.com/efan006" title="weibo">weibo</a>
+			        
+						<a class="douban" target="_blank" href="https://www.douban.com/people/46017307/" title="douban">douban</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在我做的项目中，服务器经常会用空字符串 “” 作为返回结果表示空值<br>但这在Gson当中就会遇到问题，如果这项数据的类型不是字符串，Gson解析就会报错<br>我们希望程序可以自动将空字符串解析为对应类型的空值，比如整型就解析为0，List型就解析为一个Empty List</p>
+<p>这个问题可以说是我用Retrofit+Gson以来最大的一个坑，以至于我在研究时差不多都要把源码看完了</p>
+<blockquote>
+<p>提一件离奇的事是，Gson在用整型解析空字符串时，报的居然是”Inavalid double”的错误<br>经过研究源码后发现，Gson会优先尝试解析为整型，解析失败并不会报错误，<br>继续尝试解析为double型，再失败才会报错，所以得到了”Inavalid double”</p>
+</blockquote>
+<a id="more"></a>
+<p>解决方案：<br>针对整型的解析，先写一个解析适配器，实现<code>JsonSerializer&lt;Integer&gt;, JsonDeserializer&lt;Integer&gt;</code><br>重写解析方法，先尝试用String类型解析，如果等于空字符串””，则返回0值<br>否则再尝试用整型解析，并且catch数字格式异常转成Json解析异常抛出</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IntegerDefault0Adapter</span> <span class="keyword">implements</span> <span class="title">JsonSerializer</span>&lt;<span class="title">Integer</span>&gt;, <span class="title">JsonDeserializer</span>&lt;<span class="title">Integer</span>&gt; </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">deserialize</span><span class="params">(JsonElement json, Type typeOfT, </span></span></div><div class="line">                            JsonDeserializationContext context) </div><div class="line">                             <span class="keyword">throws</span> JsonParseException &#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">if</span> (json.getAsString().equals(<span class="string">""</span>))&#123;</div><div class="line">                <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception ignore)&#123;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">return</span> json.getAsInt();</div><div class="line">        &#125; <span class="keyword">catch</span> (NumberFormatException e) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> JsonSyntaxException(e);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> JsonElement <span class="title">serialize</span><span class="params">(Integer src, Type typeOfSrc, JsonSerializationContext context)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> JsonPrimitive(src);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后在GsonBuilder里注册适配器到类型Integer与类型int</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Gson <span class="title">buildGson</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (gson == <span class="keyword">null</span>) &#123;</div><div class="line">        gson = <span class="keyword">new</span> GsonBuilder()</div><div class="line">                .setDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>)</div><div class="line">                .registerTypeAdapter(Integer.class, <span class="keyword">new</span> IntegerDefault0Adapter())</div><div class="line">                .registerTypeAdapter(<span class="keyword">int</span>.class, <span class="keyword">new</span> IntegerDefault0Adapter())</div><div class="line">                .create();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> gson;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>再在构建Retrofit时用这个自定义的Gson替换掉原生的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Retrofit = <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">                .baseUrl(API_SERVER + <span class="string">"/"</span>)</div><div class="line">                <span class="comment">//传入buildGson生成的自定义Gson</span></div><div class="line">                .addConverterFactory(ResponseConverterFactory.create(buildGson()))</div><div class="line">                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())</div><div class="line">                .client(mOkHttpClient)</div><div class="line">                .build();</div></pre></td></tr></table></figure>
+<p>这样Gson在遇到整型解析时可以将空字符串解析为0了</p>
+<p>然后我打算用同样的方式解决List的解析问题，但没想到情况没有这么简单。<br>因为List并不像整形一样是一个基本类型，List本身在数据解析的时候是要带泛型的<br>我不可能在构建的时候就定好集合里的数据类型。<br>而如果不定泛型里的数据类型，重写适配器就得根据运行时遇到的类型分别进行操作，这无异于把Gson的工作重新做一遍。<br>并且经过研究源码后发现Gson对待List也并非当做一个类型去解析的<br>而是在初始化时带有一个CollectionTypeAdapterFactory，在遇到JsonArray类型的数据就会调用集合类型的解析器，然后再适配集合里的对应数据类型。总之一句话就是，挺复杂，并且不怎么能扩展。</p>
+<p>经过研究后我找到的解决方案是<br>通过注解方式@JsonAdapter可以指定对应的适配器，优先级是高于默认的CollectionTypeAdapterFactory，和通过GsonBuilder传入的适配器的。<br>然后还是拷贝CollectionTypeAdapterFactory出来，改一份ListTypeAdapterFactory出来</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 列表解析类适配器的工厂类</div><div class="line"> * 必须通过注解<span class="doctag">@JsonAdapter</span>方式才能优先于默认的CollectionTypeAdapterFactory</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">ListTypeAdapterFactory</span> <span class="keyword">implements</span> <span class="title">TypeAdapterFactory</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function">TypeAdapter&lt;T&gt; <span class="title">create</span><span class="params">(Gson gson, TypeToken&lt;T&gt; typeToken)</span> </span>&#123;</div><div class="line">        Type type = typeToken.getType();</div><div class="line"></div><div class="line">        Class&lt;? <span class="keyword">super</span> T&gt; rawType = typeToken.getRawType();</div><div class="line">        <span class="keyword">if</span> (!List.class.isAssignableFrom(rawType)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        Type elementType = $Gson$Types.getCollectionElementType(type, rawType);</div><div class="line">        TypeAdapter&lt;?&gt; elementTypeAdapter = gson.getAdapter(TypeToken.get(elementType));</div><div class="line"></div><div class="line">        <span class="meta">@SuppressWarnings</span>(&#123;<span class="string">"unchecked"</span>, <span class="string">"rawtypes"</span>&#125;) <span class="comment">// create() doesn't define a type parameter</span></div><div class="line">        TypeAdapter&lt;T&gt; result = <span class="keyword">new</span> Adapter(gson, elementType, elementTypeAdapter);</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Adapter</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">TypeAdapter</span>&lt;<span class="title">List</span>&lt;<span class="title">E</span>&gt;&gt; </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">final</span> TypeAdapter&lt;E&gt; elementTypeAdapter;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Adapter</span><span class="params">(Gson context, Type elementType,</span></span></div><div class="line">                       TypeAdapter&lt;E&gt; elementTypeAdapter) &#123;</div><div class="line">            <span class="keyword">this</span>.elementTypeAdapter = <span class="keyword">new</span> TypeAdapterRuntimeTypeWrapper&lt;E&gt;(</div><div class="line">                                        context, elementTypeAdapter, elementType);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//关键部分是这里，重写解析方法</span></div><div class="line">        <span class="function"><span class="keyword">public</span> List&lt;E&gt; <span class="title">read</span><span class="params">(JsonReader in)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">            <span class="comment">//null值返回null</span></div><div class="line">            <span class="keyword">if</span> (in.peek() == JsonToken.NULL) &#123;</div><div class="line">                in.nextNull();</div><div class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//新建一个空的列表</span></div><div class="line">            List&lt;E&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                in.beginArray();</div><div class="line">                <span class="keyword">while</span> (in.hasNext()) &#123;</div><div class="line">                    E instance = elementTypeAdapter.read(in);</div><div class="line">                    list.add(instance);</div><div class="line">                &#125;</div><div class="line">                in.endArray();</div><div class="line">                <span class="comment">//正常解析成为列表</span></div><div class="line">            &#125; <span class="keyword">catch</span> (IllegalStateException e)&#123; <span class="comment">//如果是空字符串，会有BEGIN_ARRAY报错</span></div><div class="line">                <span class="comment">//此时尝试解析成字符串，如果不是空字符串，则依旧抛出异常</span></div><div class="line">                <span class="comment">//如果是空字符串，则不抛出异常，使最终返回一个空的列表</span></div><div class="line">                <span class="keyword">if</span> (!<span class="string">""</span>.equals(in.nextString()))&#123;</div><div class="line">                    <span class="keyword">throw</span> e;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">return</span> list;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(JsonWriter out, List&lt;E&gt; list)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">            <span class="keyword">if</span> (list == <span class="keyword">null</span>) &#123;</div><div class="line">                out.nullValue();</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            out.beginArray();</div><div class="line">            <span class="keyword">for</span> (E element : list) &#123;</div><div class="line">                elementTypeAdapter.write(out, element);</div><div class="line">            &#125;</div><div class="line">            out.endArray();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后就是Model类里面注解指定</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserListModel</span></span>&#123;</div><div class="line">    <span class="meta">@JsonAdapter</span>(ListTypeAdapterFactory.class)</div><div class="line">    List&lt;UserProfileModel&gt; users;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样Gson就能将空字符串解析成为空列表了。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/01/19/Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题/" class="archive-article-date">
+  	<time datetime="2016-01-19T11:37:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Retrofit/">Retrofit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/01/20/Retrofit+RxJava实战日志(5)-如何获取缓存/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Retrofit+RxJava实战日志(5)-如何获取缓存
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/19/Retrofit+RxJava实战日志(3)-网络异常处理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Retrofit+RxJava实战日志(3)-网络异常处理</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 易凡
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Retrofit/" style="font-size: 15px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 20px;">RxJava</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/序列化/" style="font-size: 10px;">序列化</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
