@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="https://efan006.github.io">
+  <title>RxJava的个人概述 | 易凡的技术园地</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="关于RxJava，网上已经有很多优秀的技术文章了，我当初也是看着这些上手的先放出传送门：给 Android 开发者的 RxJava 详解：http://gank.io/post/560e15be2dca930e00da1083深入浅出RxJava：http://blog.csdn.net/lzyzsd/article/category/2767743那些年我们错过的响应式编程：http://www">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RxJava的个人概述">
+<meta property="og:url" content="https://efan006.github.io/2016/01/19/RxJava的个人概述/index.html">
+<meta property="og:site_name" content="易凡的技术园地">
+<meta property="og:description" content="关于RxJava，网上已经有很多优秀的技术文章了，我当初也是看着这些上手的先放出传送门：给 Android 开发者的 RxJava 详解：http://gank.io/post/560e15be2dca930e00da1083深入浅出RxJava：http://blog.csdn.net/lzyzsd/article/category/2767743那些年我们错过的响应式编程：http://www">
+<meta property="og:updated_time" content="2016-11-29T13:24:16.663Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RxJava的个人概述">
+<meta name="twitter:description" content="关于RxJava，网上已经有很多优秀的技术文章了，我当初也是看着这些上手的先放出传送门：给 Android 开发者的 RxJava 详解：http://gank.io/post/560e15be2dca930e00da1083深入浅出RxJava：http://blog.csdn.net/lzyzsd/article/category/2767743那些年我们错过的响应式编程：http://www">
+  
+    <link rel="alternative" href="/atom.xml" title="易凡的技术园地" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://avatar.csdn.net/1/5/6/1_efan006.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">易凡</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">时间无言，却证明一切</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/efan006" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="https://weibo.com/efan006" title="weibo">weibo</a>
+		        
+					<a class="douban" target="_blank" href="https://www.douban.com/people/46017307/" title="douban">douban</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">易凡</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://avatar.csdn.net/1/5/6/1_efan006.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">易凡</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">时间无言，却证明一切</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/efan006" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="https://weibo.com/efan006" title="weibo">weibo</a>
+			        
+						<a class="douban" target="_blank" href="https://www.douban.com/people/46017307/" title="douban">douban</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-RxJava的个人概述" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RxJava的个人概述
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>关于RxJava，网上已经有很多优秀的技术文章了，我当初也是看着这些上手的<br>先放出传送门：<br>给 Android 开发者的 RxJava 详解：<a href="http://gank.io/post/560e15be2dca930e00da1083" target="_blank" rel="external">http://gank.io/post/560e15be2dca930e00da1083</a><br>深入浅出RxJava：<a href="http://blog.csdn.net/lzyzsd/article/category/2767743" target="_blank" rel="external">http://blog.csdn.net/lzyzsd/article/category/2767743</a><br>那些年我们错过的响应式编程：<a href="http://www.devtf.cn/?p=174" target="_blank" rel="external">http://www.devtf.cn/?p=174</a><br>RxJava Essentials 中文翻译版：<a href="http://rxjava.yuxingxin.com/" target="_blank" rel="external">http://rxjava.yuxingxin.com/</a></p>
+<p>然后谈谈我自己在使用RxJava后的感受：</p>
+<p>响应式编程是一种异步数据流交互的编程范式，而RxJava就是基于事件操作异步数据流在Java上实现的库<br>核心的理念是将一切都当做数据流来看待，各种变量，用户输入，数据结构，缓存等等<br>而Rx库提供了高度抽象的函数来操作流，创建、流入流出、过滤、合并、映射等等各种变换<br>不仅如此，Rx库还使得异步操作，和错误处理变得非常简洁。</p>
+<p>使用了RxJava后明显的好处就是<br>1解决了回调地狱（就是很多层的回调嵌套）的困扰<br>2切换线程变得方便<br>3配合Java8的新特性Retrolambda，代码会进一步简洁<br>更深层次的优势是，加深代码的抽象，使得我们更专注于业务逻辑而不是具体实现细节<br>并且事件驱动型的系统可以解耦成多个组件，使代码具有更好的扩展性和容错性</p>
+<p>但是也有一些难处<br>1要用好响应式编程，就得训练好基于流的编程思维，而这与过去有着较大的差异<br>这会导致重构过去的代码难度较大，以及常常会因为思维转变得不纯粹而写出“半成品”<br>2由于Rx库的操作符高度抽象，使用是很方便但深入理解的成本会很高<br>3由于Rx库很抽象，很年轻，使用时会有许多需要留意的坑，加上Retrolambda会带来一些性能上的影响</p>
+<p>但既然是优秀的东西，花些学习成本使用也是值得的</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/01/19/RxJava的个人概述/" class="archive-article-date">
+  	<time datetime="2016-01-19T07:37:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/01/19/Retrofit+RxJava实战日志(1)-在Android Studio中配置/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Retrofit+RxJava实战日志(1)-在Android Studio中配置
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/18/HTTP协议笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HTTP协议笔记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 易凡
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 20px;">RxJava</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/序列化/" style="font-size: 10px;">序列化</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="https://efan006.github.io">
+  <title>HTTP协议笔记 | 易凡的技术园地</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="HTTP协议是基于TCP协议的上层应用协议特点1无连接：每次连接只处理一个请求，处理完即断开连接特点2无状态：每次连接需要的信息都要重传
+RESTful：一种流行的互联网软件设计架构 含义是资源表现层状态转化，包括三部分
+定义直观简短的资源地址URI （应当是名词，动作放到参数里） 
+定义传输的资源：Web服务接受与返回的互联网媒体类型，如JSON，XML等 
+对资源的操作方法：GET获取资源">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP协议笔记">
+<meta property="og:url" content="https://efan006.github.io/2016/01/18/HTTP协议笔记/index.html">
+<meta property="og:site_name" content="易凡的技术园地">
+<meta property="og:description" content="HTTP协议是基于TCP协议的上层应用协议特点1无连接：每次连接只处理一个请求，处理完即断开连接特点2无状态：每次连接需要的信息都要重传
+RESTful：一种流行的互联网软件设计架构 含义是资源表现层状态转化，包括三部分
+定义直观简短的资源地址URI （应当是名词，动作放到参数里） 
+定义传输的资源：Web服务接受与返回的互联网媒体类型，如JSON，XML等 
+对资源的操作方法：GET获取资源">
+<meta property="og:updated_time" content="2016-11-29T13:23:59.287Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP协议笔记">
+<meta name="twitter:description" content="HTTP协议是基于TCP协议的上层应用协议特点1无连接：每次连接只处理一个请求，处理完即断开连接特点2无状态：每次连接需要的信息都要重传
+RESTful：一种流行的互联网软件设计架构 含义是资源表现层状态转化，包括三部分
+定义直观简短的资源地址URI （应当是名词，动作放到参数里） 
+定义传输的资源：Web服务接受与返回的互联网媒体类型，如JSON，XML等 
+对资源的操作方法：GET获取资源">
+  
+    <link rel="alternative" href="/atom.xml" title="易凡的技术园地" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://avatar.csdn.net/1/5/6/1_efan006.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">易凡</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">时间无言，却证明一切</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/efan006" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="https://weibo.com/efan006" title="weibo">weibo</a>
+		        
+					<a class="douban" target="_blank" href="https://www.douban.com/people/46017307/" title="douban">douban</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">易凡</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://avatar.csdn.net/1/5/6/1_efan006.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">易凡</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">时间无言，却证明一切</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/efan006" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="https://weibo.com/efan006" title="weibo">weibo</a>
+			        
+						<a class="douban" target="_blank" href="https://www.douban.com/people/46017307/" title="douban">douban</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-HTTP协议笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      HTTP协议笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<h1 id="HTTP协议是基于TCP协议的上层应用协议"><a href="#HTTP协议是基于TCP协议的上层应用协议" class="headerlink" title="HTTP协议是基于TCP协议的上层应用协议"></a>HTTP协议是基于TCP协议的上层应用协议</h1><p>特点1无连接：每次连接只处理一个请求，处理完即断开连接<br>特点2无状态：每次连接需要的信息都要重传</p>
+<h1 id="RESTful：一种流行的互联网软件设计架构-含义是资源表现层状态转化，包括三部分"><a href="#RESTful：一种流行的互联网软件设计架构-含义是资源表现层状态转化，包括三部分" class="headerlink" title="RESTful：一种流行的互联网软件设计架构 含义是资源表现层状态转化，包括三部分"></a>RESTful：一种流行的互联网软件设计架构 含义是资源表现层状态转化，包括三部分</h1><ol>
+<li>定义直观简短的资源地址URI （应当是名词，动作放到参数里） </li>
+<li>定义传输的资源：Web服务接受与返回的互联网媒体类型，如JSON，XML等 </li>
+<li>对资源的操作方法：GET获取资源 POST/PUT更新资源 DELETE删除资源</li>
+</ol>
+<a id="more"></a>
+<p>HTTP有两种消息，请求消息和响应消息，均包括三部分，其中首行和头部 基于ASCII编码，正文通常约定UTF-8</p>
+<p>请求首行：GET /simple.html HTTP/1.1 方法，路径，版本<br>响应首行：HTTP/1.1 200 OK 版本号，状态码，状态文本</p>
+<h1 id="常用HTTP方法："><a href="#常用HTTP方法：" class="headerlink" title="常用HTTP方法："></a>常用HTTP方法：</h1><p>先解释一下幂等性：一次请求与多次请求具有相同的副作用<br>GET请求只有Header，没有Body，响应对应URI的资源表述，<br>GET不改变状态，幂等，可缓存，有长度限制，不应在处理敏感数据时使用<br>POST会改变状态，不具备幂等性（比如重复新建会产生多个新资源），没有缓存<br>DELETE会改变状态，有幂等性（重复删除应当把403响应修正为200）<br>HEAD相当于返回没有Body的GET响应<br>PUT相当于有幂等性的POST（重复新建只返回一个新资源）</p>
+<h1 id="URI路径"><a href="#URI路径" class="headerlink" title="URI路径"></a>URI路径</h1><p>前面用/组成目录路径，?后跟查询字符串，查询字符串由多个键值对组成，用=组成键值对，用&amp;连接多个键值对<br>/path/res?key1&amp;key2=&amp;key3=v3 定义了key1，key2为空字符串，key3值为v3</p>
+<h1 id="关于URL编码"><a href="#关于URL编码" class="headerlink" title="关于URL编码"></a>关于URL编码</h1><p>网址采用UTF-8编码；查询字符串采用操作系统编码；在已有网页中GET和POST采用网页规定的编码；Ajax采用浏览器规定编码<br>通常在提交前先对URL编码，避免操作系统、网页、浏览器的编码差异<br>转码：&amp;：%26 = ：%3D % ：%25</p>
+<h1 id="常用HTTP消息头"><a href="#常用HTTP消息头" class="headerlink" title="常用HTTP消息头"></a>常用HTTP消息头</h1><p>Accept及Accept-xx，指定可接受的内容类型、编码集、语言等等<br>Cookie 用于辨认身份的会话缓存 Set-Cookie 设置Cookie<br>Expires 一个GMT时间，超过此时间认为缓存失效（受客户端时间正确性影响）<br>ETag 告诉浏览器该资源的唯一标识符（生成规则由服务器指定）<br>If-None-Match 将同一资源响应的ETag值发给服务器<br>Last-Modified 告诉浏览器最后更新的时间<br>If-Modified-Since 将同一资源响应的Last-Modified值发给服务器<br>Cache-Control 缓存机制<br>public共享缓存，private对应不同用户有不同缓存<br>no-cache 不校验缓存强制请求服务器数据<br>no-store 不保存缓存<br>max-age=[秒] 对比缓存的时间，超过规定的则认为缓存失效 max-age=0 不保存缓存<br>only-if-cached 只想要缓存，不发起请求，并且会忽视max-age<br>max-stale=[秒] 对比缓存的时间，超过规定的则认为缓存失效</p>
+<p>如果Cache-Control规定no-cache则直接请求服务器并且不再校验ETag、Last-Modified和Expires<br>如果Cache-Control通过only-if-cahced&amp;max-stale、max-age等规则认定缓存有效将不会发起请求而直接使用缓存<br>否则发起请求校验ETag，如果匹配再校验 Last-Modified，如果匹配则返回 304告知浏览器使用缓存<br>前三项都没设置才会校验Expires</p>
+<h1 id="常见状态码："><a href="#常见状态码：" class="headerlink" title="常见状态码："></a>常见状态码：</h1><p>2xx成功：200成功，<br>3xx重定向：301已转至新URL 304已转至缓存<br>4xx客户端错误：400请求格式错误 403禁止访问(权限错误) 404未找到<br>5xx服务器错误：500服务器未知错误 502从上游服务器获得无效响应 503服务器过载/当机 504网关超时</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/01/18/HTTP协议笔记/" class="archive-article-date">
+  	<time datetime="2016-01-18T01:53:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-18</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/01/19/RxJava的个人概述/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          RxJava的个人概述
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 易凡
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 20px;">RxJava</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/序列化/" style="font-size: 10px;">序列化</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

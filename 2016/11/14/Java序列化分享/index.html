@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="https://efan006.github.io">
+  <title>一篇搞定Java序列化 | 易凡的技术园地</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="序列化可以理解为一种数据对象和二进制串的转化协议，用于数据持久化和数据传输
+Serializable用法
+数据对象实现java.io.Serializable，否则会抛出NotSerializableException
+通过ObjectOutputStream和ObjectInputStream对对象进行序列化和反序列化
+
+123456789101112131415161718192021222">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一篇搞定Java序列化">
+<meta property="og:url" content="https://efan006.github.io/2016/11/14/Java序列化分享/index.html">
+<meta property="og:site_name" content="易凡的技术园地">
+<meta property="og:description" content="序列化可以理解为一种数据对象和二进制串的转化协议，用于数据持久化和数据传输
+Serializable用法
+数据对象实现java.io.Serializable，否则会抛出NotSerializableException
+通过ObjectOutputStream和ObjectInputStream对对象进行序列化和反序列化
+
+123456789101112131415161718192021222">
+<meta property="og:updated_time" content="2016-11-29T13:23:33.559Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一篇搞定Java序列化">
+<meta name="twitter:description" content="序列化可以理解为一种数据对象和二进制串的转化协议，用于数据持久化和数据传输
+Serializable用法
+数据对象实现java.io.Serializable，否则会抛出NotSerializableException
+通过ObjectOutputStream和ObjectInputStream对对象进行序列化和反序列化
+
+123456789101112131415161718192021222">
+  
+    <link rel="alternative" href="/atom.xml" title="易凡的技术园地" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://avatar.csdn.net/1/5/6/1_efan006.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">易凡</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">时间无言，却证明一切</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/efan006" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="https://weibo.com/efan006" title="weibo">weibo</a>
+		        
+					<a class="douban" target="_blank" href="https://www.douban.com/people/46017307/" title="douban">douban</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">易凡</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://avatar.csdn.net/1/5/6/1_efan006.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">易凡</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">时间无言，却证明一切</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/efan006" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="https://weibo.com/efan006" title="weibo">weibo</a>
+			        
+						<a class="douban" target="_blank" href="https://www.douban.com/people/46017307/" title="douban">douban</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Java序列化分享" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      一篇搞定Java序列化
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<h1 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h1><p>可以理解为一种数据对象和二进制串的转化协议，用于数据持久化和数据传输</p>
+<h1 id="Serializable"><a href="#Serializable" class="headerlink" title="Serializable"></a>Serializable</h1><h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><ol>
+<li>数据对象实现java.io.Serializable，否则会抛出NotSerializableException</li>
+<li>通过ObjectOutputStream和ObjectInputStream对对象进行序列化和反序列化</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(OutputStream output, T bean)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    ObjectOutputStream oos = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        oos = <span class="keyword">new</span> ObjectOutputStream(output);</div><div class="line">        oos.writeObject(bean);</div><div class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        IOUtils.closeQuietly(oos);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">read</span><span class="params">(InputStream input, Class&lt;T&gt; entityClass)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    ObjectInputStream ois = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        ois = <span class="keyword">new</span> ObjectInputStream(input);</div><div class="line">        <span class="keyword">return</span>  (T) ois.readObject();</div><div class="line">    &#125; <span class="keyword">catch</span> (IOException | ClassNotFoundException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        IOUtils.closeQuietly(ois);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="使用细节"><a href="#使用细节" class="headerlink" title="使用细节"></a>使用细节</h2><ol>
+<li>transient关键字修饰的变量，可以阻止序列化该变量。反序列化时，transient 变量会被赋值为初始值</li>
+<li>在类中增加writeObject 和 readObject 方法可以实现自定义序列化策略<ul>
+<li>ArrayList内部就是将元素transient了，然后自定义writeObject和readObject方法，因为ArrayList是动态数组，这样做可以避免大量空对象被序列化</li>
+<li>加解密密数据可以在writeObject 和 readObject 中实现</li>
+</ul>
+</li>
+<li>序列化不关注静态变量</li>
+<li>父类不实现Serializable的话那么父类的变量不会被序列化</li>
+<li>serialVersionUID一致时两个相同的类才能被序列化成功，没有特殊情况都用固定的1L即可<ul>
+<li>特性案例：Server端重新生成serialVersionUID，可以导致Client端反序列化失败，强制客户端升级</li>
+</ul>
+</li>
+<li><p>序列化会破坏单例模式</p>
+<ul>
+<li><p>要么用静态内部类的方式写单例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Holder</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton = <span class="keyword">new</span> Singleton();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getSingleton</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> Holder.singleton;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>要么单例对象重写readReslove方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton singleton;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getSingleton</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">synchronized</span> (Singleton.class) &#123;</div><div class="line">                <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;</div><div class="line">                    singleton = <span class="keyword">new</span> Singleton();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> singleton;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">private</span> Object <span class="title">readResolve</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> singleton;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="Parcelable"><a href="#Parcelable" class="headerlink" title="Parcelable"></a>Parcelable</h1><h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>Android特有，比Serializable高效，节省内存，可用于Intent传递和IPC，但不推荐用于持久化，因为存在版本差异</p>
+<h2 id="用法-1"><a href="#用法-1" class="headerlink" title="用法"></a>用法</h2><ol>
+<li>实现Parcelable</li>
+<li>重写writeToParcel和Parcelable.Creator里的createFromParcel方法，注意顺序一定要一致</li>
+</ol>
+<h1 id="XML（eXtensible-Markup-Language）"><a href="#XML（eXtensible-Markup-Language）" class="headerlink" title="XML（eXtensible Markup Language）"></a>XML（eXtensible Markup Language）</h1><h2 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h2><ol>
+<li>XML被设计为传输和存储数据，W3C标准</li>
+<li>具有自我描述性，但仅仅是纯文本，不会处理任何事情 </li>
+</ol>
+<h2 id="用法-2"><a href="#用法-2" class="headerlink" title="用法"></a>用法</h2><ol>
+<li>基于事件驱动的SAX、Pull方式，内存占用少，使用比较复杂，还有把XML全部加载成树结构的DOM方式，使用灵活但内存占用多</li>
+<li>我比较懒，直接用了Square Retrofit里的XML解析器-SimpleXML，使用就像JSON一样简单<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XmlConverter</span> <span class="keyword">implements</span> <span class="title">IConverter</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Serializer serializer = <span class="keyword">new</span> Persister();</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function">String <span class="title">toString</span><span class="params">(T bean)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        ByteArrayOutputStream output = <span class="keyword">new</span> ByteArrayOutputStream();</div><div class="line">        write(output, bean);</div><div class="line">        <span class="keyword">return</span> output.toString();</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">toBean</span><span class="params">(String string, Class&lt;T&gt; entityClass)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="keyword">if</span> (entityClass == String.class</div><div class="line">                || entityClass == CharSequence.class)&#123;</div><div class="line">            <span class="keyword">return</span> (T)string;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (entityClass == <span class="keyword">char</span>[].class)&#123;</div><div class="line">            <span class="keyword">return</span> (T)string.toCharArray();</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> serializer.read(entityClass, string);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(OutputStream output, T bean)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        serializer.write(bean, output);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">read</span><span class="params">(InputStream input, Class&lt;T&gt; entityClass)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="keyword">return</span> serializer.read(entityClass, input);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="使用细节-1"><a href="#使用细节-1" class="headerlink" title="使用细节"></a>使用细节</h2><p>某些文本，比如 JavaScript 代码，包含大量 “&lt;” 或 “&amp;” 字符。为了避免错误，可以将脚本代码定义为 CDATA。CDATA 部分中的所有内容都会被解析器忽略。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//CDATA  由 &lt;![CDATA[ 开始，由 ]]&gt; 结束</div><div class="line">//以下五种符号需要做转义</div><div class="line">&amp;lt;        &lt;   小于</div><div class="line">&amp;gt;        &gt;   大于</div><div class="line">&amp;amp;       &amp;   和号</div><div class="line">&amp;apos;      &apos;   省略号</div><div class="line">&amp;quot;      &quot;   引号</div></pre></td></tr></table></figure></p>
+<h1 id="JSON（JavaScript-Object-Notation）"><a href="#JSON（JavaScript-Object-Notation）" class="headerlink" title="JSON（JavaScript Object Notation）"></a>JSON（JavaScript Object Notation）</h1><h2 id="特点-2"><a href="#特点-2" class="headerlink" title="特点"></a>特点</h2><ol>
+<li>用“属性-值”的方式来描述对象，保持了人眼可读的优点</li>
+<li>相比XML数据更加简洁(文件大小将近一半)，解析更快</li>
+<li>JS的先天支持，广泛应用于web browser场景中，有良好的扩展性和兼容性</li>
+</ol>
+<h2 id="fastjson-使用细节"><a href="#fastjson-使用细节" class="headerlink" title="fastjson 使用细节"></a>fastjson 使用细节</h2><ol>
+<li>要有默认构造方法，或者有@JSONCreator的构造方法，不然会报JSONException</li>
+<li>要有成员要public或者要有get/set方法(我们工程约定统一用get/set方法)，不然解析不到</li>
+<li>用@JSONField(name=”xxx”)指定key名字，不指定的话采用变量名，可能会被代码混淆导致解析错误</li>
+<li>用@JSONField(format=”yyyyMMdd”)配置日期格式</li>
+<li>有些场景属性互相依赖，需要在构造方法中做初始化，可以使用@JSONCreator来指定构造函数<ul>
+<li>@JSONCreator只能有一个</li>
+<li>参数必须添加注解@JSONField(name=”xxx”)</li>
+<li>子类的@JSONCreator不会继承父类的@JSONCreator</li>
+</ul>
+</li>
+<li>有些场景属性相互依赖，需要在bean反序列化后对数据做二次处理，可以使类实现JavaBeanDeserializerListener，在onDeserializerSuccess做二次处理</li>
+<li>序列化默认跳过null，如果需要序列化，可以再序列化方法里传SerializerFeature WriteMapNullValue：是否输出值为null的字段,默认为false<br>还有其他feature：<ul>
+<li>QuoteFieldNames          输出key时是否使用双引号,默认为true   </li>
+<li>WriteNullNumberAsZero    数值字段如果为null,输出为0,而非null   </li>
+<li>WriteNullListAsEmpty     List字段如果为null,输出为[],而非null   </li>
+<li>WriteNullStringAsEmpty   字符类型字段如果为null,输出为””,而非null   </li>
+<li>WriteNullBooleanAsFalse  Boolean字段如果为null,输出为false,而非null </li>
+</ul>
+</li>
+<li>顺序问题<ul>
+<li>数组和List不会乱序</li>
+<li>在1.1.26版本 JSONObject和Bean序列化后会乱序，</li>
+<li>在1.1.41会按key的顺序重新排序，</li>
+<li>在1.1.42之后可以通过@JSONField(ordinal = 1)指定顺序</li>
+<li>还可以在类上配置@JSONType(orders = {})来设置顺序</li>
+</ul>
+</li>
+<li>反序列化遇到重复的key，以后面的为准</li>
+</ol>
+<h2 id="各种JSON库的比较（on-Android）"><a href="#各种JSON库的比较（on-Android）" class="headerlink" title="各种JSON库的比较（on Android）"></a>各种JSON库的比较（on Android）</h2><ul>
+<li>依赖比较： fastjson(202K) &lt; gson(226K) &lt; jackson(33+190+828=1051K)</li>
+<li>流行度： gson &gt; fastjson &gt; jackson  //p.s. fastjson仅在中国流行</li>
+<li>速度比较：小数据量上fastjson和gson差不多，优于jackson；大数据量上，fastjson和jackson差不多，gson很差<ul>
+<li>p.s. fastjson在jvm平台上的性能比在Android上优秀，因为运用了ASM库</li>
+</ul>
+</li>
+<li>用法比较：<ul>
+<li>fastjson：<ol>
+<li>对构造方法、get/set方法的规范比较多（见上文），不留神容易遇到坑</li>
+<li>旧版本bug比较多，最好使用最新版        </li>
+</ol>
+</li>
+<li>gson：<ol>
+<li>类型不对不报错，直接返回默认值</li>
+<li>默认不序列化null，如果需要序列化：Gson gson = new GsonBuilder().serializeNulls().create();  </li>
+<li>如果需要反序列化null为””，需要注册TypeAdapter，如果需要反序列化null为空list，需要添加@JsonAdapter注解(可参考我针对这个写的一篇<a href="http://blog.csdn.net/efan006/article/details/50544509" target="_blank" rel="external">博客日志</a>)</li>
+</ol>
+</li>
+<li>jackson：序列化默认不会跳过null，如果需要跳过<ul>
+<li>可以在数据对象上使用@JsonInclude(Include.NON_NULL)</li>
+<li>也可以在序列化方法上mapper.setSerializationInclusion(Include.NON_NULL);  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Protobuf（Google-Protocol-Buffers）"><a href="#Protobuf（Google-Protocol-Buffers）" class="headerlink" title="Protobuf（Google Protocol Buffers）"></a>Protobuf（Google Protocol Buffers）</h1><h2 id="特点-3"><a href="#特点-3" class="headerlink" title="特点"></a>特点</h2><ol>
+<li>Google开发的一种轻便高效的数据存储格式, 适合内部对性能要求高的RPC调用</li>
+<li>特点是二进制格式，数据量小（相当于json的40%左右），解包速度快，非常适合数据存储或交换</li>
+<li>proto2仅支持Java，C++，Python三种语言, proto3还支持JavaScript, Objective-C, Ruby, C#, Go.</li>
+</ol>
+<h2 id="用法-3"><a href="#用法-3" class="headerlink" title="用法"></a>用法</h2><h3 id="写proto文件定义数据结构"><a href="#写proto文件定义数据结构" class="headerlink" title="写proto文件定义数据结构"></a>写proto文件定义数据结构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">//可以写注释，会自动转到java类里</div><div class="line"></div><div class="line">import &quot;xxx.proto&quot;                                      //import表示依赖其他proto文件</div><div class="line">option java_package = &quot;com.fs.fsprobuf&quot;;                //java_package 代表这个文件所在的包名</div><div class="line">option java_outer_classname = &quot;User&quot;;                   //java_outer_classname 即为类名</div><div class="line"></div><div class="line">message Person &#123;                                        //message代表一个类</div><div class="line">    </div><div class="line">    enum PhoneType&#123;                                     //enum是一个枚举类型</div><div class="line">        MOBILE = 0;                                     </div><div class="line">        HOME = 1;</div><div class="line">        WORK = 2;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    message PhoneNumber&#123;</div><div class="line">        required string number = 1;                     //required 代表该字段必填，没传值会报错</div><div class="line">        optional PhoneType type = 2[default = HOME]     //optional 代表该字段可选，并可以为其设置默认值，默认值格式[defalut=]。</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    required int32 id = 2;                              //整型int32 布尔值bool</div><div class="line">    required string name = 1;                           //required int32 userId = 1 (修饰词 类型 域名 = 标记值)这是一个域 </div><div class="line">    optional string email = 3[default=&quot;123&quot;];           //标记值是用来在二进制编码里唯一确认当前域的</div><div class="line">    repeated PhoneNumber phone = 4;                     //repeated 代表一个list</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="生成java文件"><a href="#生成java文件" class="headerlink" title="生成java文件"></a>生成java文件</h3><p>使用官方工具把proto文件编译成java文件，放到工程里与package对应的路径下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">protoc-java.exe --java_out=./ *.proto</div></pre></td></tr></table></figure></p>
+<h3 id="导入jar包"><a href="#导入jar包" class="headerlink" title="导入jar包"></a>导入jar包</h3><p>下载官方的protobuf-java的jar包引入到工程里，使用工具类进行数据读写<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@overide</span></div><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(OutputStream output, T bean)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    <span class="keyword">if</span> (bean <span class="keyword">instanceof</span> MessageLite)&#123;</div><div class="line">        ((MessageLite)bean).writeTo(output);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(bean.getClass().getName() + <span class="string">"is not a protobuf message"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@overide</span></div><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">read</span><span class="params">(InputStream input, Class&lt;T&gt; entityClass)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    <span class="keyword">if</span> (MessageLite.class.isAssignableFrom(entityClass)) &#123;</div><div class="line">        Parser&lt;MessageLite&gt; parser;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Field field = entityClass.getDeclaredField(<span class="string">"PARSER"</span>);</div><div class="line">            parser = (Parser&lt;MessageLite&gt;) field.get(<span class="keyword">null</span>);</div><div class="line">            <span class="keyword">return</span> (T)parser.parseFrom(input);</div><div class="line">        &#125; <span class="keyword">catch</span> (NoSuchFieldException | IllegalAccessException e) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(</div><div class="line">                    <span class="string">"Found a protobuf message but "</span> + entityClass.getName() + <span class="string">" had no PARSER field."</span>);</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(entityClass.getName() + <span class="string">"is not a protobuf message"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li>升级proto定义，不可修改现有域的标记值，不可添加/删除required域。可以删除optional，repeated域。添加optional，repeated域必须采用不同的标记值（之前删除过的也不能用）</li>
+<li>proto文件转成的java类 带有大量的方法(实测仅3个变量的类，生成了近100个方法，800行代码)。这在Android上极易导致方法数超65535上限</li>
+</ol>
+<h2 id="另一种选择"><a href="#另一种选择" class="headerlink" title="另一种选择"></a>另一种选择</h2><p>我们也可以采用Square Wire 项目的proto工具  </p>
+<ol>
+<li>首先也是写proto文件，一样的  </li>
+<li>在项目gradle里引入wire组件<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.wire:wire-runtime:2.2.0'</span>   </div><div class="line">``` </div><div class="line"><span class="number">3</span>. 然后下载wire-compiler-VERSION-jar-with-<span class="keyword">dependencies</span>.jar工具，这个需要去maven仓库下载[下载地址](http:<span class="comment">//search.maven.org/#search|ga|1|g%3A%22com.squareup.wire%22) 注意要选择与gradle引入的wire版本一致</span></div><div class="line"><span class="number">4</span>. 使用cmd执行命令生成java文件   </div><div class="line">```   </div><div class="line">java -jar -Dfile.encoding=UTF-<span class="number">8</span> wire-compiler-<span class="number">2.2</span>.<span class="number">0</span>-jar-with-<span class="keyword">dependencies</span>.jar --proto_path=. --java_out=. *.proto  </div><div class="line">```   </div><div class="line"><span class="number">5</span>. 使用工具类读写</div><div class="line">``` java</div><div class="line">    @Override</div><div class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="keyword">void</span> <span class="keyword">write</span>(OutputStream output, T bean) <span class="keyword">throws</span> Exception &#123;</div><div class="line">        <span class="keyword">if</span> (bean <span class="keyword">instanceof</span> Message)&#123;</div><div class="line">            ((Message)bean).encode(output);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(bean.getClass().getName() + <span class="string">" is not a protobuf message"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    @Override</div><div class="line">    <span class="keyword">public</span> &lt;T&gt; T <span class="keyword">read</span>(InputStream input, <span class="keyword">Class</span>&lt;T&gt; entityClass) <span class="keyword">throws</span> Exception &#123;</div><div class="line">        <span class="keyword">if</span> (Message.<span class="keyword">class</span>.isAssignableFrom(entityClass)) &#123;</div><div class="line">            ProtoAdapter&lt;Message&gt; adapter;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                Field field = entityClass.getDeclaredField(<span class="string">"ADAPTER"</span>);</div><div class="line">                adapter = (ProtoAdapter&lt;Message&gt;)field.get(<span class="keyword">null</span>);</div><div class="line">                <span class="keyword">return</span> (T)adapter.decode(input);</div><div class="line">            &#125; <span class="keyword">catch</span> (NoSuchFieldException | IllegalAccessException e) &#123;</div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(</div><div class="line">                        <span class="string">"Found a protobuf message but "</span> + entityClass.getName() + <span class="string">" had no ADAPTER field."</span>);</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(entityClass.getName() + <span class="string">" is not a protobuf message"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>使用wire项目的工具，方法数显著裁剪了（还是之前3个变量的类，方法20多个，188行代码）</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/14/Java序列化分享/" class="archive-article-date">
+  	<time datetime="2016-11-14T11:11:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-14</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/序列化/">序列化</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2016/01/19/Retrofit+RxJava实战日志(1)-在Android Studio中配置/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Retrofit+RxJava实战日志(1)-在Android Studio中配置</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 易凡
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 20px;">RxJava</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/序列化/" style="font-size: 10px;">序列化</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
