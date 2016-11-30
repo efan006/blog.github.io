@@ -6,18 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://efan006.github.io">
-  <title>Retrofit+RxJava实战日志(1)-在Android Studio中配置 | 易凡的技术园地</title>
+  <title>关于博主 | 易凡的技术园地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在build.gradle中添加12345678910111213141516171819202122232425262728//加入retrolambda需要的plugin声明apply plugin: &apos;me.tatarka.retrolambda&apos;        //retrolambda的编译路径依赖 buildscript &amp;#123;    dependencies &amp;#123;">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Retrofit+RxJava实战日志(1)-在Android Studio中配置">
-<meta property="og:url" content="https://efan006.github.io/2016/01/19/Retrofit+RxJava实战日志(1)-在Android Studio中配置/index.html">
+  <meta name="description" content="个人简介
+姓名：王可为网名：易凡、efan职业：Android程序猿所在地：深圳座右铭：人，生而不凡，人生易凡
+
+联系方式
+邮箱：&amp;#x77;&amp;#x6b;&amp;#119;&amp;#x31;&amp;#57;&amp;#x38;&amp;#x38;&amp;#x40;&amp;#113;&amp;#x71;&amp;#46;&amp;#99;&amp;#111;&amp;#109;微博：@efan006GitHub: https://github.com/efan006">
+<meta property="og:type" content="website">
+<meta property="og:title" content="关于博主">
+<meta property="og:url" content="https://efan006.github.io/about/index.html">
 <meta property="og:site_name" content="易凡的技术园地">
-<meta property="og:description" content="在build.gradle中添加12345678910111213141516171819202122232425262728//加入retrolambda需要的plugin声明apply plugin: &apos;me.tatarka.retrolambda&apos;        //retrolambda的编译路径依赖 buildscript &amp;#123;    dependencies &amp;#123;">
-<meta property="og:updated_time" content="2016-11-29T14:00:45.623Z">
+<meta property="og:description" content="个人简介
+姓名：王可为网名：易凡、efan职业：Android程序猿所在地：深圳座右铭：人，生而不凡，人生易凡
+
+联系方式
+邮箱：&amp;#x77;&amp;#x6b;&amp;#119;&amp;#x31;&amp;#57;&amp;#x38;&amp;#x38;&amp;#x40;&amp;#113;&amp;#x71;&amp;#46;&amp;#99;&amp;#111;&amp;#109;微博：@efan006GitHub: https://github.com/efan006">
+<meta property="og:updated_time" content="2016-11-30T02:13:40.545Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Retrofit+RxJava实战日志(1)-在Android Studio中配置">
-<meta name="twitter:description" content="在build.gradle中添加12345678910111213141516171819202122232425262728//加入retrolambda需要的plugin声明apply plugin: &apos;me.tatarka.retrolambda&apos;        //retrolambda的编译路径依赖 buildscript &amp;#123;    dependencies &amp;#123;">
+<meta name="twitter:title" content="关于博主">
+<meta name="twitter:description" content="个人简介
+姓名：王可为网名：易凡、efan职业：Android程序猿所在地：深圳座右铭：人，生而不凡，人生易凡
+
+联系方式
+邮箱：&amp;#x77;&amp;#x6b;&amp;#119;&amp;#x31;&amp;#57;&amp;#x38;&amp;#x38;&amp;#x40;&amp;#113;&amp;#x71;&amp;#46;&amp;#99;&amp;#111;&amp;#109;微博：@efan006GitHub: https://github.com/efan006">
   
     <link rel="alternative" href="/atom.xml" title="易凡的技术园地" type="application/atom+xml">
   
@@ -136,7 +148,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-Retrofit+RxJava实战日志(1)-在Android Studio中配置" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -146,7 +158,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Retrofit+RxJava实战日志(1)-在Android Studio中配置
+      关于博主
     </h1>
   
 
@@ -154,22 +166,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在build.gradle中添加<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//加入retrolambda需要的plugin声明</span></div><div class="line">apply plugin: <span class="string">'me.tatarka.retrolambda'</span>        </div><div class="line"><span class="comment">//retrolambda的编译路径依赖 </span></div><div class="line"><span class="keyword">buildscript</span> &#123;</div><div class="line">    <span class="keyword">dependencies</span> &#123; </div><div class="line">        <span class="keyword">classpath</span> <span class="string">'me.tatarka:gradle-retrolambda:3.1.0'</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//让IDE使用用Java8语法解析</span></div><div class="line">android &#123;</div><div class="line">    compileOptions &#123;</div><div class="line">        <span class="keyword">sourceCompatibility</span> JavaVersion.VERSION_1_8</div><div class="line">        <span class="keyword">targetCompatibility</span> JavaVersion.VERSION_1_8</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//编译RxJava</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'io.reactivex:rxjava:1.0.14'</span> </div><div class="line"></div><div class="line"><span class="comment">//编译RxAndroid</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'io.reactivex:rxandroid:1.0.1'</span></div><div class="line"></div><div class="line"><span class="comment">//编译Retrofit及其相关库，包括Gson</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit:retrofit:2.0.0-beta2'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit:converter-gson:2.0.0-beta2'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.google.code.gson:gson:2.4'</span></div></pre></td></tr></table></figure></p>
-<p>﻿Retrolambda是借用Java8的语法特性，需要配置好Java8<br>安装好Java8后在File &gt; Project structure &gt; SDK Location中配置Java8路径</p>
+        <h1 id="个人简介"><a href="#个人简介" class="headerlink" title="个人简介"></a>个人简介</h1><blockquote>
+<p>姓名：王可为<br>网名：易凡、efan<br>职业：Android程序猿<br>所在地：深圳<br>座右铭：人，生而不凡，人生易凡</p>
+</blockquote>
+<h1 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h1><blockquote>
+<p>邮箱：<a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#111;&#58;&#x77;&#x6b;&#119;&#x31;&#57;&#x38;&#x38;&#x40;&#113;&#x71;&#46;&#99;&#111;&#109;">&#x77;&#x6b;&#119;&#x31;&#57;&#x38;&#x38;&#x40;&#113;&#x71;&#46;&#99;&#111;&#109;</a><br>微博：<a href="http://weibo.com/efan006" target="_blank" rel="external">@efan006</a><br>GitHub: <a href="https://github.com/efan006" target="_blank" rel="external">https://github.com/efan006</a></p>
+</blockquote>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/01/19/Retrofit+RxJava实战日志(1)-在Android Studio中配置/" class="archive-article-date">
-  	<time datetime="2016-01-19T08:28:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
+      <a href="/about/index.html" class="archive-article-date">
+  	<time datetime="2016-11-30T02:13:40.545Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-30</time>
 </a>
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Retrofit/">Retrofit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
-	</div>
-
       
 
       <div class="clearfix"></div>
@@ -178,25 +189,6 @@
 </article>
 
   
-<nav id="article-nav">
-  
-    <a href="/2016/01/19/Retrofit+RxJava实战日志(2)-基本使用/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Retrofit+RxJava实战日志(2)-基本使用
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/01/19/RxJava的个人概述/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">RxJava的个人概述</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 
 
@@ -225,7 +217,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Retrofit+RxJava实战日志(1)-在Android Studio中配置" data-title="Retrofit+RxJava实战日志(1)-在Android Studio中配置" data-url="https://efan006.github.io/2016/01/19/Retrofit+RxJava实战日志(1)-在Android Studio中配置/"></div>
+	<div class="ds-thread" data-thread-key="undefined" data-title="关于博主" data-url="https://efan006.github.io/about/index.html"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -266,7 +258,7 @@
 		mathjax: false,
 		animate: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
