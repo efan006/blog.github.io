@@ -13,7 +13,7 @@ Retrofit本身会抛出HttpException，Gson解析会抛出解析异常，此外�
 这里要先解决一个问题，就是G">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Retrofit+RxJava实战日志(3)-网络异常处理">
-<meta property="og:url" content="https://efan006.github.io/2016/01/19/Retrofit+RxJava实战日志(3)-网络异常处理/index.html">
+<meta property="og:url" content="https://efan006.github.io/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(3)-网络异常处理.html">
 <meta property="og:site_name" content="易凡的技术园地">
 <meta property="og:description" content="上一篇文章写了Retrofit和RxJava的基本使用，最后的subscriber并没有写具体实现成功的返回通常对应了各种不同的处理，而异常返回通常有着统一的处理因此这一篇单独讲讲异常处理
 Retrofit本身会抛出HttpException，Gson解析会抛出解析异常，此外我们还应该处理与服务器约定好的“异常”，即上一篇提到的返回数据中result字段值不会0的情况
@@ -43,7 +43,7 @@ Retrofit本身会抛出HttpException，Gson解析会抛出解析异常，此外�
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
 			
-			<img src="http://avatar.csdn.net/1/5/6/1_efan006.jpg" class="js-avatar">
+			<img src="img/avatar.jpg" class="js-avatar">
 			
 		</a>
 
@@ -68,7 +68,7 @@ Retrofit本身会抛出HttpException，Gson解析会抛出解析异常，此外�
 	        
     		
     			
-    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">归档</a>
     			
     			
             
@@ -78,7 +78,7 @@ Retrofit本身会抛出HttpException，Gson解析会抛出解析异常，此外�
     			
             
     			
-    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
     			
     			
             
@@ -108,7 +108,7 @@ Retrofit本身会抛出HttpException，Gson解析会抛出解析异常，此外�
 		<header id="header" class="inner">
 			<div class="profilepic">
 				
-					<img src="http://avatar.csdn.net/1/5/6/1_efan006.jpg" class="js-avatar">
+					<img src="img/avatar.jpg" class="js-avatar">
 				
 			</div>
 			<hgroup>
@@ -182,7 +182,7 @@ Retrofit本身会抛出HttpException，Gson解析会抛出解析异常，此外�
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/01/19/Retrofit+RxJava实战日志(3)-网络异常处理/" class="archive-article-date">
+      <a href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(3)-网络异常处理.html" class="archive-article-date">
   	<time datetime="2016-01-19T10:13:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
 </a>
       
@@ -201,7 +201,7 @@ Retrofit本身会抛出HttpException，Gson解析会抛出解析异常，此外�
   
 <nav id="article-nav">
   
-    <a href="/2016/01/19/Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -211,7 +211,7 @@ Retrofit本身会抛出HttpException，Gson解析会抛出解析异常，此外�
     </a>
   
   
-    <a href="/2016/01/19/Retrofit+RxJava实战日志(2)-基本使用/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(2)-基本使用.html" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Retrofit+RxJava实战日志(2)-基本使用</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -246,7 +246,7 @@ Retrofit本身会抛出HttpException，Gson解析会抛出解析异常，此外�
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Retrofit+RxJava实战日志(3)-网络异常处理" data-title="Retrofit+RxJava实战日志(3)-网络异常处理" data-url="https://efan006.github.io/2016/01/19/Retrofit+RxJava实战日志(3)-网络异常处理/"></div>
+	<div class="ds-thread" data-thread-key="Retrofit+RxJava实战日志(3)-网络异常处理" data-title="Retrofit+RxJava实战日志(3)-网络异常处理" data-url="https://efan006.github.io/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(3)-网络异常处理.html"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -310,8 +310,8 @@ Retrofit本身会抛出HttpException，Gson解析会抛出解析异常，此外�
       <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
     
     
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
     
-      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
     
   </ul>
   <div class="tools-wrap">
@@ -329,13 +329,17 @@ Retrofit本身会抛出HttpException，Gson解析会抛出解析异常，此外�
     
 
     
-
-    
-    	<section class="tools-section tools-section-me">
-  	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
-  	  	
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://smallfan.net/">Smallfan&#39;s Blog</a>
+  	        
+  	        </div>
+  		
     	</section>
+    
+
     
   </div>
   

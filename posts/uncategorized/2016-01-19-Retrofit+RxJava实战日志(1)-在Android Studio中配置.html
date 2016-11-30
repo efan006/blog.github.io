@@ -6,18 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://efan006.github.io">
-  <title>RxJava的个人概述 | 易凡的技术园地</title>
+  <title>Retrofit+RxJava实战日志(1)-在Android Studio中配置 | 易凡的技术园地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关于RxJava，网上已经有很多优秀的技术文章了，我当初也是看着这些上手的先放出传送门：给 Android 开发者的 RxJava 详解：http://gank.io/post/560e15be2dca930e00da1083深入浅出RxJava：http://blog.csdn.net/lzyzsd/article/category/2767743那些年我们错过的响应式编程：http://www">
+  <meta name="description" content="在build.gradle中添加12345678910111213141516171819202122232425262728//加入retrolambda需要的plugin声明apply plugin: &apos;me.tatarka.retrolambda&apos;        //retrolambda的编译路径依赖 buildscript &amp;#123;    dependencies &amp;#123;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RxJava的个人概述">
-<meta property="og:url" content="https://efan006.github.io/2016/01/19/RxJava的个人概述/index.html">
+<meta property="og:title" content="Retrofit+RxJava实战日志(1)-在Android Studio中配置">
+<meta property="og:url" content="https://efan006.github.io/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(1)-在Android Studio中配置.html">
 <meta property="og:site_name" content="易凡的技术园地">
-<meta property="og:description" content="关于RxJava，网上已经有很多优秀的技术文章了，我当初也是看着这些上手的先放出传送门：给 Android 开发者的 RxJava 详解：http://gank.io/post/560e15be2dca930e00da1083深入浅出RxJava：http://blog.csdn.net/lzyzsd/article/category/2767743那些年我们错过的响应式编程：http://www">
-<meta property="og:updated_time" content="2016-11-29T13:24:16.663Z">
+<meta property="og:description" content="在build.gradle中添加12345678910111213141516171819202122232425262728//加入retrolambda需要的plugin声明apply plugin: &apos;me.tatarka.retrolambda&apos;        //retrolambda的编译路径依赖 buildscript &amp;#123;    dependencies &amp;#123;">
+<meta property="og:updated_time" content="2016-11-29T14:00:45.623Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RxJava的个人概述">
-<meta name="twitter:description" content="关于RxJava，网上已经有很多优秀的技术文章了，我当初也是看着这些上手的先放出传送门：给 Android 开发者的 RxJava 详解：http://gank.io/post/560e15be2dca930e00da1083深入浅出RxJava：http://blog.csdn.net/lzyzsd/article/category/2767743那些年我们错过的响应式编程：http://www">
+<meta name="twitter:title" content="Retrofit+RxJava实战日志(1)-在Android Studio中配置">
+<meta name="twitter:description" content="在build.gradle中添加12345678910111213141516171819202122232425262728//加入retrolambda需要的plugin声明apply plugin: &apos;me.tatarka.retrolambda&apos;        //retrolambda的编译路径依赖 buildscript &amp;#123;    dependencies &amp;#123;">
   
     <link rel="alternative" href="/atom.xml" title="易凡的技术园地" type="application/atom+xml">
   
@@ -37,7 +37,7 @@
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
 			
-			<img src="http://avatar.csdn.net/1/5/6/1_efan006.jpg" class="js-avatar">
+			<img src="img/avatar.jpg" class="js-avatar">
 			
 		</a>
 
@@ -62,7 +62,7 @@
 	        
     		
     			
-    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">归档</a>
     			
     			
             
@@ -72,7 +72,7 @@
     			
             
     			
-    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
     			
     			
             
@@ -102,7 +102,7 @@
 		<header id="header" class="inner">
 			<div class="profilepic">
 				
-					<img src="http://avatar.csdn.net/1/5/6/1_efan006.jpg" class="js-avatar">
+					<img src="img/avatar.jpg" class="js-avatar">
 				
 			</div>
 			<hgroup>
@@ -136,7 +136,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-RxJava的个人概述" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Retrofit+RxJava实战日志(1)-在Android Studio中配置" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -146,7 +146,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      RxJava的个人概述
+      Retrofit+RxJava实战日志(1)-在Android Studio中配置
     </h1>
   
 
@@ -154,24 +154,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>关于RxJava，网上已经有很多优秀的技术文章了，我当初也是看着这些上手的<br>先放出传送门：<br>给 Android 开发者的 RxJava 详解：<a href="http://gank.io/post/560e15be2dca930e00da1083" target="_blank" rel="external">http://gank.io/post/560e15be2dca930e00da1083</a><br>深入浅出RxJava：<a href="http://blog.csdn.net/lzyzsd/article/category/2767743" target="_blank" rel="external">http://blog.csdn.net/lzyzsd/article/category/2767743</a><br>那些年我们错过的响应式编程：<a href="http://www.devtf.cn/?p=174" target="_blank" rel="external">http://www.devtf.cn/?p=174</a><br>RxJava Essentials 中文翻译版：<a href="http://rxjava.yuxingxin.com/" target="_blank" rel="external">http://rxjava.yuxingxin.com/</a></p>
-<p>然后谈谈我自己在使用RxJava后的感受：</p>
-<p>响应式编程是一种异步数据流交互的编程范式，而RxJava就是基于事件操作异步数据流在Java上实现的库<br>核心的理念是将一切都当做数据流来看待，各种变量，用户输入，数据结构，缓存等等<br>而Rx库提供了高度抽象的函数来操作流，创建、流入流出、过滤、合并、映射等等各种变换<br>不仅如此，Rx库还使得异步操作，和错误处理变得非常简洁。</p>
-<p>使用了RxJava后明显的好处就是<br>1解决了回调地狱（就是很多层的回调嵌套）的困扰<br>2切换线程变得方便<br>3配合Java8的新特性Retrolambda，代码会进一步简洁<br>更深层次的优势是，加深代码的抽象，使得我们更专注于业务逻辑而不是具体实现细节<br>并且事件驱动型的系统可以解耦成多个组件，使代码具有更好的扩展性和容错性</p>
-<p>但是也有一些难处<br>1要用好响应式编程，就得训练好基于流的编程思维，而这与过去有着较大的差异<br>这会导致重构过去的代码难度较大，以及常常会因为思维转变得不纯粹而写出“半成品”<br>2由于Rx库的操作符高度抽象，使用是很方便但深入理解的成本会很高<br>3由于Rx库很抽象，很年轻，使用时会有许多需要留意的坑，加上Retrolambda会带来一些性能上的影响</p>
-<p>但既然是优秀的东西，花些学习成本使用也是值得的</p>
+        <p>在build.gradle中添加<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//加入retrolambda需要的plugin声明</span></div><div class="line">apply plugin: <span class="string">'me.tatarka.retrolambda'</span>        </div><div class="line"><span class="comment">//retrolambda的编译路径依赖 </span></div><div class="line"><span class="keyword">buildscript</span> &#123;</div><div class="line">    <span class="keyword">dependencies</span> &#123; </div><div class="line">        <span class="keyword">classpath</span> <span class="string">'me.tatarka:gradle-retrolambda:3.1.0'</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//让IDE使用用Java8语法解析</span></div><div class="line">android &#123;</div><div class="line">    compileOptions &#123;</div><div class="line">        <span class="keyword">sourceCompatibility</span> JavaVersion.VERSION_1_8</div><div class="line">        <span class="keyword">targetCompatibility</span> JavaVersion.VERSION_1_8</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//编译RxJava</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'io.reactivex:rxjava:1.0.14'</span> </div><div class="line"></div><div class="line"><span class="comment">//编译RxAndroid</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'io.reactivex:rxandroid:1.0.1'</span></div><div class="line"></div><div class="line"><span class="comment">//编译Retrofit及其相关库，包括Gson</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit:retrofit:2.0.0-beta2'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit:converter-gson:2.0.0-beta2'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.google.code.gson:gson:2.4'</span></div></pre></td></tr></table></figure></p>
+<p>﻿Retrolambda是借用Java8的语法特性，需要配置好Java8<br>安装好Java8后在File &gt; Project structure &gt; SDK Location中配置Java8路径</p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/01/19/RxJava的个人概述/" class="archive-article-date">
-  	<time datetime="2016-01-19T07:37:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
+      <a href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(1)-在Android Studio中配置.html" class="archive-article-date">
+  	<time datetime="2016-01-19T08:28:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Retrofit/">Retrofit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
 	</div>
 
       
@@ -184,18 +180,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/01/19/Retrofit+RxJava实战日志(1)-在Android Studio中配置/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(2)-基本使用.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Retrofit+RxJava实战日志(1)-在Android Studio中配置
+          Retrofit+RxJava实战日志(2)-基本使用
         
       </div>
     </a>
   
   
-    <a href="/2016/01/18/HTTP协议笔记/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">HTTP协议笔记</div>
+    <a href="/posts/uncategorized/2016-01-19-RxJava的个人概述.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RxJava的个人概述</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -229,7 +225,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="RxJava的个人概述" data-title="RxJava的个人概述" data-url="https://efan006.github.io/2016/01/19/RxJava的个人概述/"></div>
+	<div class="ds-thread" data-thread-key="Retrofit+RxJava实战日志(1)-在Android Studio中配置" data-title="Retrofit+RxJava实战日志(1)-在Android Studio中配置" data-url="https://efan006.github.io/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(1)-在Android Studio中配置.html"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -293,8 +289,8 @@
       <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
     
     
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
     
-      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
     
   </ul>
   <div class="tools-wrap">
@@ -312,13 +308,17 @@
     
 
     
-
-    
-    	<section class="tools-section tools-section-me">
-  	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
-  	  	
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://smallfan.net/">Smallfan&#39;s Blog</a>
+  	        
+  	        </div>
+  		
     	</section>
+    
+
     
   </div>
   

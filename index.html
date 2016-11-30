@@ -33,7 +33,7 @@
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
 			
-			<img src="http://avatar.csdn.net/1/5/6/1_efan006.jpg" class="js-avatar">
+			<img src="img/avatar.jpg" class="js-avatar">
 			
 		</a>
 
@@ -58,7 +58,7 @@
 	        
     		
     			
-    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">归档</a>
     			
     			
             
@@ -68,7 +68,7 @@
     			
             
     			
-    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
     			
     			
             
@@ -98,7 +98,7 @@
 		<header id="header" class="inner">
 			<div class="profilepic">
 				
-					<img src="http://avatar.csdn.net/1/5/6/1_efan006.jpg" class="js-avatar">
+					<img src="img/avatar.jpg" class="js-avatar">
 				
 			</div>
 			<hgroup>
@@ -144,7 +144,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/14/Java序列化分享/">一篇搞定Java序列化</a>
+      <a class="article-title" href="/posts/uncategorized/2016-11-14-Java序列化分享.html">一篇搞定Java序列化</a>
     </h1>
   
 
@@ -159,13 +159,13 @@
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(OutputStream output, T bean)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    ObjectOutputStream oos = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        oos = <span class="keyword">new</span> ObjectOutputStream(output);</div><div class="line">        oos.writeObject(bean);</div><div class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        IOUtils.closeQuietly(oos);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">read</span><span class="params">(InputStream input, Class&lt;T&gt; entityClass)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    ObjectInputStream ois = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        ois = <span class="keyword">new</span> ObjectInputStream(input);</div><div class="line">        <span class="keyword">return</span>  (T) ois.readObject();</div><div class="line">    &#125; <span class="keyword">catch</span> (IOException | ClassNotFoundException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        IOUtils.closeQuietly(ois);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
         <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/11/14/Java序列化分享/#more">more >></a>
+          <a class="article-more-a"  href="/posts/uncategorized/2016-11-14-Java序列化分享.html#more">more >></a>
         </p>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/11/14/Java序列化分享/" class="archive-article-date">
+      <a href="/posts/uncategorized/2016-11-14-Java序列化分享.html" class="archive-article-date">
   	<time datetime="2016-11-14T11:11:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-14</time>
 </a>
       
@@ -201,7 +201,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/20/Retrofit+RxJava实战日志(5)-如何获取缓存/">Retrofit+RxJava实战日志(5)-如何获取缓存</a>
+      <a class="article-title" href="/posts/uncategorized/2016-01-20-Retrofit+RxJava实战日志(5)-如何获取缓存.html">Retrofit+RxJava实战日志(5)-如何获取缓存</a>
     </h1>
   
 
@@ -212,8 +212,8 @@
         <p>首先OKHttp启用缓存目录</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">OkHttpClient mOkHttpClient = <span class="keyword">new</span> OkHttpClient();</div><div class="line">File cacheDirectory = <span class="keyword">new</span> File(context.getApplicationContext()</div><div class="line">           .getCacheDir().getAbsolutePath(), <span class="string">"HttpCache"</span>);  <span class="comment">//指定缓存路径</span></div><div class="line">Cache cache = <span class="keyword">new</span> Cache(cacheDirectory, <span class="number">20</span> * <span class="number">1024</span> * <span class="number">1024</span>);  <span class="comment">//指定缓存大小</span></div><div class="line">mOkHttpClient.setCache(cache);</div></pre></td></tr></table></figure>
 <p>Retrofit可以用@POST、@GET注解定义POST方法和GET方法<br>在参数中用@Header定义请求头部。</p>
-<p>参考HTTP协议的内容(传送门：<a href="/2016/01/18/HTTP协议笔记/" title="HTTP协议笔记">HTTP协议笔记</a>)<br>POST方法没有缓存；<br>头部Cache-Control设为max-age=0时则不会使用缓存而请求服务器；<br>为if-only-cache时只查询缓存而不会请求服务器，max-stale可以配合设置缓存失效时间</p>
-<p>以之前写的<a href="/2016/01/19/Retrofit+RxJava实战日志(2)-基本使用/" title="Retrofit+RxJava实战日志(2)-基本使用">Retrofit+RxJava实战日志(2)-基本使用</a>为例：</p>
+<p>参考HTTP协议的内容(传送门：<a href="/posts/uncategorized/2016-01-18-HTTP协议笔记.html" title="HTTP协议笔记">HTTP协议笔记</a>)<br>POST方法没有缓存；<br>头部Cache-Control设为max-age=0时则不会使用缓存而请求服务器；<br>为if-only-cache时只查询缓存而不会请求服务器，max-stale可以配合设置缓存失效时间</p>
+<p>以之前写的<a href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(2)-基本使用.html" title="Retrofit+RxJava实战日志(2)-基本使用">Retrofit+RxJava实战日志(2)-基本使用</a>为例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseApi</span> </span>&#123;</div><div class="line">    <span class="comment">//设缓存有效期为两个星期</span></div><div class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> CACHE_STALE_SEC = <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">14</span>;</div><div class="line">    <span class="comment">//查询缓存的Cache-Control设置</span></div><div class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> String CACHE_CONTROL_CACHE = <span class="string">"only-if-cached, max-stale="</span> + CACHE_STALE_SEC;</div><div class="line">    <span class="comment">//查询网络的Cache-Control设置</span></div><div class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> String CACHE_CONTROL_NETWORK = <span class="string">"max-age=0"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserApi</span> <span class="keyword">extends</span> <span class="title">BaseApi</span></span>&#123;</div><div class="line">    <span class="comment">//定义接口</span></div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserService</span> </span>&#123;</div><div class="line">        <span class="comment">//POST方法没有缓存，适用于更新操作的接口</span></div><div class="line">        <span class="meta">@FormUrlEncoded</span></div><div class="line">        <span class="meta">@POST</span>(<span class="string">"user/user_updateUserName"</span>)</div><div class="line">        <span class="function">Observable&lt;BaseResp&gt; <span class="title">updateUserName</span><span class="params">(@Field(<span class="string">"userName"</span>)</span> String userName)</span>;</div><div class="line">        </div><div class="line">        <span class="comment">//用@Header设置Cache-Control</span></div><div class="line">        <span class="meta">@GET</span>(<span class="string">"user/user_queryProfile"</span>)</div><div class="line">        <span class="function">Observable&lt;UserProfileResp&gt; <span class="title">queryProfile</span><span class="params">(@Header(<span class="string">"Cache-Control"</span>)</span> String cacheControl,</span></div><div class="line">                                                 @<span class="title">Query</span><span class="params">(<span class="string">"userId"</span>)</span> <span class="keyword">int</span> userId);</div><div class="line"></div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> UserService service = getRetrofit().create(UserService.class);</div><div class="line"></div><div class="line">    <span class="comment">//更新用户名接口</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Observable&lt;BaseResp&gt; <span class="title">updateUserName</span><span class="params">(String userName)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> service.updateUserName(userName);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//查询用户信息网络接口</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Observable&lt;UserProfileResp&gt; <span class="title">queryProfile</span><span class="params">(<span class="keyword">int</span> userId)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> service.queryProfile(CACHE_CONTROL_NETWORK, userId);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//查询用户信息缓存接口</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Observable&lt;UserProfileResp&gt; <span class="title">queryProfileCache</span><span class="params">(<span class="keyword">int</span> userId)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> service.queryProfile(CACHE_CONTROL_CACHE, userId);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>如此在需要查询缓存的时候调用queryProfileCache，在需要网络数据时调用queryProfile即可。</p>
@@ -222,7 +222,7 @@
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/01/20/Retrofit+RxJava实战日志(5)-如何获取缓存/" class="archive-article-date">
+      <a href="/posts/uncategorized/2016-01-20-Retrofit+RxJava实战日志(5)-如何获取缓存.html" class="archive-article-date">
   	<time datetime="2016-01-20T08:02:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-20</time>
 </a>
       
@@ -258,7 +258,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/19/Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题/">Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题</a>
+      <a class="article-title" href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题.html">Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题</a>
     </h1>
   
 
@@ -272,13 +272,13 @@
 <p>提一件离奇的事是，Gson在用整型解析空字符串时，报的居然是”Inavalid double”的错误<br>经过研究源码后发现，Gson会优先尝试解析为整型，解析失败并不会报错误，<br>继续尝试解析为double型，再失败才会报错，所以得到了”Inavalid double”</p>
 </blockquote>
         <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/01/19/Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题/#more">more >></a>
+          <a class="article-more-a"  href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题.html#more">more >></a>
         </p>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/01/19/Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题/" class="archive-article-date">
+      <a href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题.html" class="archive-article-date">
   	<time datetime="2016-01-19T11:37:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
 </a>
       
@@ -314,7 +314,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/19/Retrofit+RxJava实战日志(3)-网络异常处理/">Retrofit+RxJava实战日志(3)-网络异常处理</a>
+      <a class="article-title" href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(3)-网络异常处理.html">Retrofit+RxJava实战日志(3)-网络异常处理</a>
     </h1>
   
 
@@ -328,13 +328,13 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;result&quot;:&quot;结果代号，0表示成功&quot;,</div><div class="line">    &quot;msg&quot;:&quot;成功返回时是消息数据列表，失败时是异常消息文本&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>那么msg究竟应该定义为String，还是一个List呢</p>
         <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/01/19/Retrofit+RxJava实战日志(3)-网络异常处理/#more">more >></a>
+          <a class="article-more-a"  href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(3)-网络异常处理.html#more">more >></a>
         </p>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/01/19/Retrofit+RxJava实战日志(3)-网络异常处理/" class="archive-article-date">
+      <a href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(3)-网络异常处理.html" class="archive-article-date">
   	<time datetime="2016-01-19T10:13:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
 </a>
       
@@ -370,7 +370,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/19/Retrofit+RxJava实战日志(2)-基本使用/">Retrofit+RxJava实战日志(2)-基本使用</a>
+      <a class="article-title" href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(2)-基本使用.html">Retrofit+RxJava实战日志(2)-基本使用</a>
     </h1>
   
 
@@ -381,13 +381,13 @@
         <p>首先是抽象的基类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseApi</span> </span>&#123;</div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String API_SERVER = <span class="string">"服务器地址"</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> OkHttpClient mOkHttpClient = <span class="keyword">new</span> OkHttpClient();</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Retrofit mRetrofit;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">static</span> Retrofit <span class="title">getRetrofit</span><span class="params">()</span> </span>&#123;</div><div class="line">	        <span class="keyword">if</span> (Retrofit == <span class="keyword">null</span>) &#123;</div><div class="line">		        Context context = Application.getInstance().getApplicationContext();</div><div class="line">	            <span class="comment">//设定30秒超时</span></div><div class="line">	            mOkHttpClient.setConnectTimeout(<span class="number">30</span>, TimeUnit.SECONDS);</div><div class="line">	            <span class="comment">//设置拦截器，以用于自定义Cookies的设置</span></div><div class="line">	            mOkHttpClient.networkInterceptors()</div><div class="line">				            .add(<span class="keyword">new</span> CookiesInterceptor(context));</div><div class="line">		        <span class="comment">//设置缓存目录</span></div><div class="line">	            File cacheDirectory = <span class="keyword">new</span> File(context.getCacheDir()</div><div class="line">							            .getAbsolutePath(), <span class="string">"HttpCache"</span>);</div><div class="line">	            Cache cache = <span class="keyword">new</span> Cache(cacheDirectory, <span class="number">20</span> * <span class="number">1024</span> * <span class="number">1024</span>);</div><div class="line">	            mOkHttpClient.setCache(cache);</div><div class="line">	            <span class="comment">//构建Retrofit</span></div><div class="line">	            mRetrofit = <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">			            <span class="comment">//配置服务器路径</span></div><div class="line">	                    .baseUrl(API_SERVER + <span class="string">"/"</span>)  </div><div class="line">	                    <span class="comment">//设置日期解析格式，这样可以直接解析Date类型</span></div><div class="line">	                    .setDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>)  </div><div class="line">	                    <span class="comment">//配置转化库，默认是Gson</span></div><div class="line">	                    .addConverterFactory(ResponseConverterFactory.create())</div><div class="line">	                    <span class="comment">//配置回调库，采用RxJava</span></div><div class="line">	                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())</div><div class="line">	                    <span class="comment">//设置OKHttpClient为网络客户端</span></div><div class="line">	                    .client(mOkHttpClient)</div><div class="line">	                    .build();</div><div class="line">	        &#125;</div><div class="line">	        <span class="keyword">return</span> mRetrofit;</div><div class="line">	    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>然后是Cookies拦截器</p>
         <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/01/19/Retrofit+RxJava实战日志(2)-基本使用/#more">more >></a>
+          <a class="article-more-a"  href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(2)-基本使用.html#more">more >></a>
         </p>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/01/19/Retrofit+RxJava实战日志(2)-基本使用/" class="archive-article-date">
+      <a href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(2)-基本使用.html" class="archive-article-date">
   	<time datetime="2016-01-19T09:39:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
 </a>
       
@@ -423,7 +423,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/19/Retrofit+RxJava实战日志(1)-在Android Studio中配置/">Retrofit+RxJava实战日志(1)-在Android Studio中配置</a>
+      <a class="article-title" href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(1)-在Android Studio中配置.html">Retrofit+RxJava实战日志(1)-在Android Studio中配置</a>
     </h1>
   
 
@@ -438,7 +438,7 @@
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/01/19/Retrofit+RxJava实战日志(1)-在Android Studio中配置/" class="archive-article-date">
+      <a href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(1)-在Android Studio中配置.html" class="archive-article-date">
   	<time datetime="2016-01-19T08:28:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
 </a>
       
@@ -474,7 +474,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/19/RxJava的个人概述/">RxJava的个人概述</a>
+      <a class="article-title" href="/posts/uncategorized/2016-01-19-RxJava的个人概述.html">RxJava的个人概述</a>
     </h1>
   
 
@@ -493,7 +493,7 @@
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/01/19/RxJava的个人概述/" class="archive-article-date">
+      <a href="/posts/uncategorized/2016-01-19-RxJava的个人概述.html" class="archive-article-date">
   	<time datetime="2016-01-19T07:37:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
 </a>
       
@@ -529,7 +529,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/18/HTTP协议笔记/">HTTP协议笔记</a>
+      <a class="article-title" href="/posts/uncategorized/2016-01-18-HTTP协议笔记.html">HTTP协议笔记</a>
     </h1>
   
 
@@ -545,13 +545,13 @@
 <li>对资源的操作方法：GET获取资源 POST/PUT更新资源 DELETE删除资源</li>
 </ol>
         <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/01/18/HTTP协议笔记/#more">more >></a>
+          <a class="article-more-a"  href="/posts/uncategorized/2016-01-18-HTTP协议笔记.html#more">more >></a>
         </p>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/01/18/HTTP协议笔记/" class="archive-article-date">
+      <a href="/posts/uncategorized/2016-01-18-HTTP协议笔记.html" class="archive-article-date">
   	<time datetime="2016-01-18T01:53:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-18</time>
 </a>
       
@@ -623,8 +623,8 @@
       <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
     
     
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
     
-      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
     
   </ul>
   <div class="tools-wrap">
@@ -642,13 +642,17 @@
     
 
     
-
-    
-    	<section class="tools-section tools-section-me">
-  	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
-  	  	
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://smallfan.net/">Smallfan&#39;s Blog</a>
+  	        
+  	        </div>
+  		
     	</section>
+    
+
     
   </div>
   

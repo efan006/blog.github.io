@@ -14,7 +14,7 @@
 提一件离奇的事是，Gson在用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题">
-<meta property="og:url" content="https://efan006.github.io/2016/01/19/Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题/index.html">
+<meta property="og:url" content="https://efan006.github.io/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题.html">
 <meta property="og:site_name" content="易凡的技术园地">
 <meta property="og:description" content="在我做的项目中，服务器经常会用空字符串 “” 作为返回结果表示空值但这在Gson当中就会遇到问题，如果这项数据的类型不是字符串，Gson解析就会报错我们希望程序可以自动将空字符串解析为对应类型的空值，比如整型就解析为0，List型就解析为一个Empty List
 这个问题可以说是我用Retrofit+Gson以来最大的一个坑，以至于我在研究时差不多都要把源码看完了
@@ -46,7 +46,7 @@
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
 			
-			<img src="http://avatar.csdn.net/1/5/6/1_efan006.jpg" class="js-avatar">
+			<img src="img/avatar.jpg" class="js-avatar">
 			
 		</a>
 
@@ -71,7 +71,7 @@
 	        
     		
     			
-    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">归档</a>
     			
     			
             
@@ -81,7 +81,7 @@
     			
             
     			
-    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
     			
     			
             
@@ -111,7 +111,7 @@
 		<header id="header" class="inner">
 			<div class="profilepic">
 				
-					<img src="http://avatar.csdn.net/1/5/6/1_efan006.jpg" class="js-avatar">
+					<img src="img/avatar.jpg" class="js-avatar">
 				
 			</div>
 			<hgroup>
@@ -187,7 +187,7 @@
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/01/19/Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题/" class="archive-article-date">
+      <a href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题.html" class="archive-article-date">
   	<time datetime="2016-01-19T11:37:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
 </a>
       
@@ -206,7 +206,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/01/20/Retrofit+RxJava实战日志(5)-如何获取缓存/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/posts/uncategorized/2016-01-20-Retrofit+RxJava实战日志(5)-如何获取缓存.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -216,7 +216,7 @@
     </a>
   
   
-    <a href="/2016/01/19/Retrofit+RxJava实战日志(3)-网络异常处理/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(3)-网络异常处理.html" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Retrofit+RxJava实战日志(3)-网络异常处理</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -251,7 +251,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题" data-title="Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题" data-url="https://efan006.github.io/2016/01/19/Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题/"></div>
+	<div class="ds-thread" data-thread-key="Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题" data-title="Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题" data-url="https://efan006.github.io/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题.html"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -315,8 +315,8 @@
       <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
     
     
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
     
-      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
     
   </ul>
   <div class="tools-wrap">
@@ -334,13 +334,17 @@
     
 
     
-
-    
-    	<section class="tools-section tools-section-me">
-  	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
-  	  	
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://smallfan.net/">Smallfan&#39;s Blog</a>
+  	        
+  	        </div>
+  		
     	</section>
+    
+
     
   </div>
   

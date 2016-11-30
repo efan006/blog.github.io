@@ -12,7 +12,7 @@
 12345OkHttpClient mOkHttpClient = new OkHttpClient();File cacheDirectory = new File(context.getApplicationContext()           .getCacheDir().getAbsolutePath(), &quot;HttpCache&quot;);  //指定缓存路径Ca">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Retrofit+RxJava实战日志(5)-如何获取缓存">
-<meta property="og:url" content="https://efan006.github.io/2016/01/20/Retrofit+RxJava实战日志(5)-如何获取缓存/index.html">
+<meta property="og:url" content="https://efan006.github.io/posts/uncategorized/2016-01-20-Retrofit+RxJava实战日志(5)-如何获取缓存.html">
 <meta property="og:site_name" content="易凡的技术园地">
 <meta property="og:description" content="首先OKHttp启用缓存目录
 12345OkHttpClient mOkHttpClient = new OkHttpClient();File cacheDirectory = new File(context.getApplicationContext()           .getCacheDir().getAbsolutePath(), &quot;HttpCache&quot;);  //指定缓存路径Ca">
@@ -40,7 +40,7 @@
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
 			
-			<img src="http://avatar.csdn.net/1/5/6/1_efan006.jpg" class="js-avatar">
+			<img src="img/avatar.jpg" class="js-avatar">
 			
 		</a>
 
@@ -65,7 +65,7 @@
 	        
     		
     			
-    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">归档</a>
     			
     			
             
@@ -75,7 +75,7 @@
     			
             
     			
-    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
     			
     			
             
@@ -105,7 +105,7 @@
 		<header id="header" class="inner">
 			<div class="profilepic">
 				
-					<img src="http://avatar.csdn.net/1/5/6/1_efan006.jpg" class="js-avatar">
+					<img src="img/avatar.jpg" class="js-avatar">
 				
 			</div>
 			<hgroup>
@@ -160,8 +160,8 @@
         <p>首先OKHttp启用缓存目录</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">OkHttpClient mOkHttpClient = <span class="keyword">new</span> OkHttpClient();</div><div class="line">File cacheDirectory = <span class="keyword">new</span> File(context.getApplicationContext()</div><div class="line">           .getCacheDir().getAbsolutePath(), <span class="string">"HttpCache"</span>);  <span class="comment">//指定缓存路径</span></div><div class="line">Cache cache = <span class="keyword">new</span> Cache(cacheDirectory, <span class="number">20</span> * <span class="number">1024</span> * <span class="number">1024</span>);  <span class="comment">//指定缓存大小</span></div><div class="line">mOkHttpClient.setCache(cache);</div></pre></td></tr></table></figure>
 <p>Retrofit可以用@POST、@GET注解定义POST方法和GET方法<br>在参数中用@Header定义请求头部。</p>
-<p>参考HTTP协议的内容(传送门：<a href="/2016/01/18/HTTP协议笔记/" title="HTTP协议笔记">HTTP协议笔记</a>)<br>POST方法没有缓存；<br>头部Cache-Control设为max-age=0时则不会使用缓存而请求服务器；<br>为if-only-cache时只查询缓存而不会请求服务器，max-stale可以配合设置缓存失效时间</p>
-<p>以之前写的<a href="/2016/01/19/Retrofit+RxJava实战日志(2)-基本使用/" title="Retrofit+RxJava实战日志(2)-基本使用">Retrofit+RxJava实战日志(2)-基本使用</a>为例：</p>
+<p>参考HTTP协议的内容(传送门：<a href="/posts/uncategorized/2016-01-18-HTTP协议笔记.html" title="HTTP协议笔记">HTTP协议笔记</a>)<br>POST方法没有缓存；<br>头部Cache-Control设为max-age=0时则不会使用缓存而请求服务器；<br>为if-only-cache时只查询缓存而不会请求服务器，max-stale可以配合设置缓存失效时间</p>
+<p>以之前写的<a href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(2)-基本使用.html" title="Retrofit+RxJava实战日志(2)-基本使用">Retrofit+RxJava实战日志(2)-基本使用</a>为例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseApi</span> </span>&#123;</div><div class="line">    <span class="comment">//设缓存有效期为两个星期</span></div><div class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> CACHE_STALE_SEC = <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">14</span>;</div><div class="line">    <span class="comment">//查询缓存的Cache-Control设置</span></div><div class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> String CACHE_CONTROL_CACHE = <span class="string">"only-if-cached, max-stale="</span> + CACHE_STALE_SEC;</div><div class="line">    <span class="comment">//查询网络的Cache-Control设置</span></div><div class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> String CACHE_CONTROL_NETWORK = <span class="string">"max-age=0"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserApi</span> <span class="keyword">extends</span> <span class="title">BaseApi</span></span>&#123;</div><div class="line">    <span class="comment">//定义接口</span></div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserService</span> </span>&#123;</div><div class="line">        <span class="comment">//POST方法没有缓存，适用于更新操作的接口</span></div><div class="line">        <span class="meta">@FormUrlEncoded</span></div><div class="line">        <span class="meta">@POST</span>(<span class="string">"user/user_updateUserName"</span>)</div><div class="line">        <span class="function">Observable&lt;BaseResp&gt; <span class="title">updateUserName</span><span class="params">(@Field(<span class="string">"userName"</span>)</span> String userName)</span>;</div><div class="line">        </div><div class="line">        <span class="comment">//用@Header设置Cache-Control</span></div><div class="line">        <span class="meta">@GET</span>(<span class="string">"user/user_queryProfile"</span>)</div><div class="line">        <span class="function">Observable&lt;UserProfileResp&gt; <span class="title">queryProfile</span><span class="params">(@Header(<span class="string">"Cache-Control"</span>)</span> String cacheControl,</span></div><div class="line">                                                 @<span class="title">Query</span><span class="params">(<span class="string">"userId"</span>)</span> <span class="keyword">int</span> userId);</div><div class="line"></div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> UserService service = getRetrofit().create(UserService.class);</div><div class="line"></div><div class="line">    <span class="comment">//更新用户名接口</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Observable&lt;BaseResp&gt; <span class="title">updateUserName</span><span class="params">(String userName)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> service.updateUserName(userName);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//查询用户信息网络接口</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Observable&lt;UserProfileResp&gt; <span class="title">queryProfile</span><span class="params">(<span class="keyword">int</span> userId)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> service.queryProfile(CACHE_CONTROL_NETWORK, userId);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//查询用户信息缓存接口</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Observable&lt;UserProfileResp&gt; <span class="title">queryProfileCache</span><span class="params">(<span class="keyword">int</span> userId)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> service.queryProfile(CACHE_CONTROL_CACHE, userId);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>如此在需要查询缓存的时候调用queryProfileCache，在需要网络数据时调用queryProfile即可。</p>
@@ -170,7 +170,7 @@
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/01/20/Retrofit+RxJava实战日志(5)-如何获取缓存/" class="archive-article-date">
+      <a href="/posts/uncategorized/2016-01-20-Retrofit+RxJava实战日志(5)-如何获取缓存.html" class="archive-article-date">
   	<time datetime="2016-01-20T08:02:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-20</time>
 </a>
       
@@ -189,7 +189,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/11/14/Java序列化分享/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/posts/uncategorized/2016-11-14-Java序列化分享.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -199,7 +199,7 @@
     </a>
   
   
-    <a href="/2016/01/19/Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题.html" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -234,7 +234,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Retrofit+RxJava实战日志(5)-如何获取缓存" data-title="Retrofit+RxJava实战日志(5)-如何获取缓存" data-url="https://efan006.github.io/2016/01/20/Retrofit+RxJava实战日志(5)-如何获取缓存/"></div>
+	<div class="ds-thread" data-thread-key="Retrofit+RxJava实战日志(5)-如何获取缓存" data-title="Retrofit+RxJava实战日志(5)-如何获取缓存" data-url="https://efan006.github.io/posts/uncategorized/2016-01-20-Retrofit+RxJava实战日志(5)-如何获取缓存.html"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -298,8 +298,8 @@
       <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
     
     
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
     
-      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
     
   </ul>
   <div class="tools-wrap">
@@ -317,13 +317,17 @@
     
 
     
-
-    
-    	<section class="tools-section tools-section-me">
-  	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
-  	  	
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://smallfan.net/">Smallfan&#39;s Blog</a>
+  	        
+  	        </div>
+  		
     	</section>
+    
+
     
   </div>
   
