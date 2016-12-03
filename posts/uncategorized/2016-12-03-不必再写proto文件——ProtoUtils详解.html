@@ -6,14 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://efan006.github.io">
-  <title>易凡的技术园地</title>
+  <title>不必再写proto文件——ProtoUtils详解 | 易凡的技术园地</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="易凡的技术园地">
-<meta property="og:url" content="https://efan006.github.io/index.html">
+  <meta name="description" content="Protobuf不易用关于Protobuf协议的介绍可以参看我之前的日志一篇搞定Java序列化 中的protobuf篇相对于其他数据格式如json、xml， protobuf有着数据量小，解析快的显著优势但是这意味着开发者需要写proto文件，需要了解proto message的语法，并且目前IDE还不支持proto的智能提示，十分不便基于此，我开发了一个ProtoUtils工程（先放上GitHu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="不必再写proto文件——ProtoUtils详解">
+<meta property="og:url" content="https://efan006.github.io/posts/uncategorized/2016-12-03-不必再写proto文件——ProtoUtils详解.html">
 <meta property="og:site_name" content="易凡的技术园地">
+<meta property="og:description" content="Protobuf不易用关于Protobuf协议的介绍可以参看我之前的日志一篇搞定Java序列化 中的protobuf篇相对于其他数据格式如json、xml， protobuf有着数据量小，解析快的显著优势但是这意味着开发者需要写proto文件，需要了解proto message的语法，并且目前IDE还不支持proto的智能提示，十分不便基于此，我开发了一个ProtoUtils工程（先放上GitHu">
+<meta property="og:updated_time" content="2016-12-03T02:39:27.488Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="易凡的技术园地">
+<meta name="twitter:title" content="不必再写proto文件——ProtoUtils详解">
+<meta name="twitter:description" content="Protobuf不易用关于Protobuf协议的介绍可以参看我之前的日志一篇搞定Java序列化 中的protobuf篇相对于其他数据格式如json、xml， protobuf有着数据量小，解析快的显著优势但是这意味着开发者需要写proto文件，需要了解proto message的语法，并且目前IDE还不支持proto的智能提示，十分不便基于此，我开发了一个ProtoUtils工程（先放上GitHu">
   
     <link rel="alternative" href="/atom.xml" title="易凡的技术园地" type="application/atom+xml">
   
@@ -132,9 +136,7 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-    <article id="post-不必再写proto文件——ProtoUtils详解" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-不必再写proto文件——ProtoUtils详解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -143,8 +145,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/posts/uncategorized/2016-12-03-不必再写proto文件——ProtoUtils详解.html">不必再写proto文件——ProtoUtils详解</a>
+    <h1 class="article-title" itemprop="name">
+      不必再写proto文件——ProtoUtils详解
     </h1>
   
 
@@ -207,460 +209,64 @@
   </div>
 </article>
 
-
-
-
-
-
-
-
-
-
   
-    <article id="post-一篇搞定Java序列化" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/posts/uncategorized/2016-11-14-一篇搞定Java序列化.html">一篇搞定Java序列化</a>
-    </h1>
   
+    <a href="/posts/uncategorized/2016-11-14-一篇搞定Java序列化.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">一篇搞定Java序列化</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h1><p>可以理解为一种数据对象和二进制串的转化协议，用于数据持久化和数据传输</p>
-<h1 id="Serializable"><a href="#Serializable" class="headerlink" title="Serializable"></a>Serializable</h1><h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><ol>
-<li>数据对象实现java.io.Serializable，否则会抛出NotSerializableException</li>
-<li>通过ObjectOutputStream和ObjectInputStream对对象进行序列化和反序列化</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(OutputStream output, T bean)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    ObjectOutputStream oos = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        oos = <span class="keyword">new</span> ObjectOutputStream(output);</div><div class="line">        oos.writeObject(bean);</div><div class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        IOUtils.closeQuietly(oos);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">read</span><span class="params">(InputStream input, Class&lt;T&gt; entityClass)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    ObjectInputStream ois = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        ois = <span class="keyword">new</span> ObjectInputStream(input);</div><div class="line">        <span class="keyword">return</span>  (T) ois.readObject();</div><div class="line">    &#125; <span class="keyword">catch</span> (IOException | ClassNotFoundException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        IOUtils.closeQuietly(ois);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/posts/uncategorized/2016-11-14-一篇搞定Java序列化.html#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/posts/uncategorized/2016-11-14-一篇搞定Java序列化.html" class="archive-article-date">
-  	<time datetime="2016-11-14T11:11:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-14</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/序列化/">序列化</a></li></ul>
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-      
 
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
 
 
 
 
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="不必再写proto文件——ProtoUtils详解" data-title="不必再写proto文件——ProtoUtils详解" data-url="https://efan006.github.io/posts/uncategorized/2016-12-03-不必再写proto文件——ProtoUtils详解.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"efan6"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
 
-
-
-
-  
-    <article id="post-Retrofit+RxJava实战日志(5)-如何获取缓存" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/posts/uncategorized/2016-01-20-Retrofit+RxJava实战日志(5)-如何获取缓存.html">Retrofit+RxJava实战日志(5)-如何获取缓存</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>首先OKHttp启用缓存目录</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">OkHttpClient mOkHttpClient = <span class="keyword">new</span> OkHttpClient();</div><div class="line">File cacheDirectory = <span class="keyword">new</span> File(context.getApplicationContext()</div><div class="line">           .getCacheDir().getAbsolutePath(), <span class="string">"HttpCache"</span>);  <span class="comment">//指定缓存路径</span></div><div class="line">Cache cache = <span class="keyword">new</span> Cache(cacheDirectory, <span class="number">20</span> * <span class="number">1024</span> * <span class="number">1024</span>);  <span class="comment">//指定缓存大小</span></div><div class="line">mOkHttpClient.setCache(cache);</div></pre></td></tr></table></figure>
-<p>Retrofit可以用@POST、@GET注解定义POST方法和GET方法<br>在参数中用@Header定义请求头部。</p>
-<p>参考HTTP协议的内容(传送门：<a href="/posts/uncategorized/2016-01-18-HTTP协议笔记.html" title="HTTP协议笔记">HTTP协议笔记</a>)<br>POST方法没有缓存；<br>头部Cache-Control设为max-age=0时则不会使用缓存而请求服务器；<br>为if-only-cache时只查询缓存而不会请求服务器，max-stale可以配合设置缓存失效时间</p>
-<p>以之前写的<a href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(2)-基本使用.html" title="Retrofit+RxJava实战日志(2)-基本使用">Retrofit+RxJava实战日志(2)-基本使用</a>为例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseApi</span> </span>&#123;</div><div class="line">    <span class="comment">//设缓存有效期为两个星期</span></div><div class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> CACHE_STALE_SEC = <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">14</span>;</div><div class="line">    <span class="comment">//查询缓存的Cache-Control设置</span></div><div class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> String CACHE_CONTROL_CACHE = <span class="string">"only-if-cached, max-stale="</span> + CACHE_STALE_SEC;</div><div class="line">    <span class="comment">//查询网络的Cache-Control设置</span></div><div class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> String CACHE_CONTROL_NETWORK = <span class="string">"max-age=0"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserApi</span> <span class="keyword">extends</span> <span class="title">BaseApi</span></span>&#123;</div><div class="line">    <span class="comment">//定义接口</span></div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserService</span> </span>&#123;</div><div class="line">        <span class="comment">//POST方法没有缓存，适用于更新操作的接口</span></div><div class="line">        <span class="meta">@FormUrlEncoded</span></div><div class="line">        <span class="meta">@POST</span>(<span class="string">"user/user_updateUserName"</span>)</div><div class="line">        <span class="function">Observable&lt;BaseResp&gt; <span class="title">updateUserName</span><span class="params">(@Field(<span class="string">"userName"</span>)</span> String userName)</span>;</div><div class="line">        </div><div class="line">        <span class="comment">//用@Header设置Cache-Control</span></div><div class="line">        <span class="meta">@GET</span>(<span class="string">"user/user_queryProfile"</span>)</div><div class="line">        <span class="function">Observable&lt;UserProfileResp&gt; <span class="title">queryProfile</span><span class="params">(@Header(<span class="string">"Cache-Control"</span>)</span> String cacheControl,</span></div><div class="line">                                                 @<span class="title">Query</span><span class="params">(<span class="string">"userId"</span>)</span> <span class="keyword">int</span> userId);</div><div class="line"></div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> UserService service = getRetrofit().create(UserService.class);</div><div class="line"></div><div class="line">    <span class="comment">//更新用户名接口</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Observable&lt;BaseResp&gt; <span class="title">updateUserName</span><span class="params">(String userName)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> service.updateUserName(userName);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//查询用户信息网络接口</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Observable&lt;UserProfileResp&gt; <span class="title">queryProfile</span><span class="params">(<span class="keyword">int</span> userId)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> service.queryProfile(CACHE_CONTROL_NETWORK, userId);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//查询用户信息缓存接口</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Observable&lt;UserProfileResp&gt; <span class="title">queryProfileCache</span><span class="params">(<span class="keyword">int</span> userId)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> service.queryProfile(CACHE_CONTROL_CACHE, userId);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如此在需要查询缓存的时候调用queryProfileCache，在需要网络数据时调用queryProfile即可。</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/posts/uncategorized/2016-01-20-Retrofit+RxJava实战日志(5)-如何获取缓存.html" class="archive-article-date">
-  	<time datetime="2016-01-20T08:02:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-20</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Retrofit/">Retrofit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题.html">Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在我做的项目中，服务器经常会用空字符串 “” 作为返回结果表示空值<br>但这在Gson当中就会遇到问题，如果这项数据的类型不是字符串，Gson解析就会报错<br>我们希望程序可以自动将空字符串解析为对应类型的空值，比如整型就解析为0，List型就解析为一个Empty List</p>
-<p>这个问题可以说是我用Retrofit+Gson以来最大的一个坑，以至于我在研究时差不多都要把源码看完了</p>
-<blockquote>
-<p>提一件离奇的事是，Gson在用整型解析空字符串时，报的居然是”Inavalid double”的错误<br>经过研究源码后发现，Gson会优先尝试解析为整型，解析失败并不会报错误，<br>继续尝试解析为double型，再失败才会报错，所以得到了”Inavalid double”</p>
-</blockquote>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题.html#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(4)-Gson解析空字符串的问题.html" class="archive-article-date">
-  	<time datetime="2016-01-19T11:37:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Retrofit/">Retrofit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Retrofit+RxJava实战日志(3)-网络异常处理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(3)-网络异常处理.html">Retrofit+RxJava实战日志(3)-网络异常处理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>上一篇文章写了Retrofit和RxJava的基本使用，最后的subscriber并没有写具体实现<br>成功的返回通常对应了各种不同的处理，而异常返回通常有着统一的处理<br>因此这一篇单独讲讲异常处理</p>
-<p>Retrofit本身会抛出HttpException，Gson解析会抛出解析异常，<br>此外我们还应该处理与服务器约定好的“异常”，即上一篇提到的返回数据中result字段值不会0的情况</p>
-<p>这里要先解决一个问题，就是Gson构建的对象，通过注解定义key名，以变量的类型定value的类型，<br>但如果同样的key在不同情况下属于不同的数据类型，就会出问题。<br>比如上一篇文章提及，服务器返回格式是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;result&quot;:&quot;结果代号，0表示成功&quot;,</div><div class="line">    &quot;msg&quot;:&quot;成功返回时是消息数据列表，失败时是异常消息文本&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>那么msg究竟应该定义为String，还是一个List呢</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(3)-网络异常处理.html#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(3)-网络异常处理.html" class="archive-article-date">
-  	<time datetime="2016-01-19T10:13:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Retrofit/">Retrofit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Retrofit+RxJava实战日志(2)-基本使用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(2)-基本使用.html">Retrofit+RxJava实战日志(2)-基本使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>首先是抽象的基类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseApi</span> </span>&#123;</div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String API_SERVER = <span class="string">"服务器地址"</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> OkHttpClient mOkHttpClient = <span class="keyword">new</span> OkHttpClient();</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Retrofit mRetrofit;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">static</span> Retrofit <span class="title">getRetrofit</span><span class="params">()</span> </span>&#123;</div><div class="line">	        <span class="keyword">if</span> (Retrofit == <span class="keyword">null</span>) &#123;</div><div class="line">		        Context context = Application.getInstance().getApplicationContext();</div><div class="line">	            <span class="comment">//设定30秒超时</span></div><div class="line">	            mOkHttpClient.setConnectTimeout(<span class="number">30</span>, TimeUnit.SECONDS);</div><div class="line">	            <span class="comment">//设置拦截器，以用于自定义Cookies的设置</span></div><div class="line">	            mOkHttpClient.networkInterceptors()</div><div class="line">				            .add(<span class="keyword">new</span> CookiesInterceptor(context));</div><div class="line">		        <span class="comment">//设置缓存目录</span></div><div class="line">	            File cacheDirectory = <span class="keyword">new</span> File(context.getCacheDir()</div><div class="line">							            .getAbsolutePath(), <span class="string">"HttpCache"</span>);</div><div class="line">	            Cache cache = <span class="keyword">new</span> Cache(cacheDirectory, <span class="number">20</span> * <span class="number">1024</span> * <span class="number">1024</span>);</div><div class="line">	            mOkHttpClient.setCache(cache);</div><div class="line">	            <span class="comment">//构建Retrofit</span></div><div class="line">	            mRetrofit = <span class="keyword">new</span> Retrofit.Builder()</div><div class="line">			            <span class="comment">//配置服务器路径</span></div><div class="line">	                    .baseUrl(API_SERVER + <span class="string">"/"</span>)  </div><div class="line">	                    <span class="comment">//设置日期解析格式，这样可以直接解析Date类型</span></div><div class="line">	                    .setDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>)  </div><div class="line">	                    <span class="comment">//配置转化库，默认是Gson</span></div><div class="line">	                    .addConverterFactory(ResponseConverterFactory.create())</div><div class="line">	                    <span class="comment">//配置回调库，采用RxJava</span></div><div class="line">	                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())</div><div class="line">	                    <span class="comment">//设置OKHttpClient为网络客户端</span></div><div class="line">	                    .client(mOkHttpClient)</div><div class="line">	                    .build();</div><div class="line">	        &#125;</div><div class="line">	        <span class="keyword">return</span> mRetrofit;</div><div class="line">	    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>然后是Cookies拦截器</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(2)-基本使用.html#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(2)-基本使用.html" class="archive-article-date">
-  	<time datetime="2016-01-19T09:39:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Retrofit/">Retrofit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Retrofit+RxJava实战日志(1)-在Android Studio中配置" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(1)-在Android Studio中配置.html">Retrofit+RxJava实战日志(1)-在Android Studio中配置</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在build.gradle中添加<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//加入retrolambda需要的plugin声明</span></div><div class="line">apply plugin: <span class="string">'me.tatarka.retrolambda'</span>        </div><div class="line"><span class="comment">//retrolambda的编译路径依赖 </span></div><div class="line"><span class="keyword">buildscript</span> &#123;</div><div class="line">    <span class="keyword">dependencies</span> &#123; </div><div class="line">        <span class="keyword">classpath</span> <span class="string">'me.tatarka:gradle-retrolambda:3.1.0'</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//让IDE使用用Java8语法解析</span></div><div class="line">android &#123;</div><div class="line">    compileOptions &#123;</div><div class="line">        <span class="keyword">sourceCompatibility</span> JavaVersion.VERSION_1_8</div><div class="line">        <span class="keyword">targetCompatibility</span> JavaVersion.VERSION_1_8</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//编译RxJava</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'io.reactivex:rxjava:1.0.14'</span> </div><div class="line"></div><div class="line"><span class="comment">//编译RxAndroid</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'io.reactivex:rxandroid:1.0.1'</span></div><div class="line"></div><div class="line"><span class="comment">//编译Retrofit及其相关库，包括Gson</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit:retrofit:2.0.0-beta2'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit:converter-gson:2.0.0-beta2'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'</span></div><div class="line"><span class="keyword">compile</span> <span class="string">'com.google.code.gson:gson:2.4'</span></div></pre></td></tr></table></figure></p>
-<p>﻿Retrolambda是借用Java8的语法特性，需要配置好Java8<br>安装好Java8后在File &gt; Project structure &gt; SDK Location中配置Java8路径</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/posts/uncategorized/2016-01-19-Retrofit+RxJava实战日志(1)-在Android Studio中配置.html" class="archive-article-date">
-  	<time datetime="2016-01-19T08:28:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Retrofit/">Retrofit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-RxJava的个人概述" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/posts/uncategorized/2016-01-19-RxJava的个人概述.html">RxJava的个人概述</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>关于RxJava，网上已经有很多优秀的技术文章了，我当初也是看着这些上手的<br>先放出传送门：<br>给 Android 开发者的 RxJava 详解：<a href="http://gank.io/post/560e15be2dca930e00da1083" target="_blank" rel="external">http://gank.io/post/560e15be2dca930e00da1083</a><br>深入浅出RxJava：<a href="http://blog.csdn.net/lzyzsd/article/category/2767743" target="_blank" rel="external">http://blog.csdn.net/lzyzsd/article/category/2767743</a><br>那些年我们错过的响应式编程：<a href="http://www.devtf.cn/?p=174" target="_blank" rel="external">http://www.devtf.cn/?p=174</a><br>RxJava Essentials 中文翻译版：<a href="http://rxjava.yuxingxin.com/" target="_blank" rel="external">http://rxjava.yuxingxin.com/</a></p>
-<p>然后谈谈我自己在使用RxJava后的感受：</p>
-<p>响应式编程是一种异步数据流交互的编程范式，而RxJava就是基于事件操作异步数据流在Java上实现的库<br>核心的理念是将一切都当做数据流来看待，各种变量，用户输入，数据结构，缓存等等<br>而Rx库提供了高度抽象的函数来操作流，创建、流入流出、过滤、合并、映射等等各种变换<br>不仅如此，Rx库还使得异步操作，和错误处理变得非常简洁。</p>
-<p>使用了RxJava后明显的好处就是<br>1解决了回调地狱（就是很多层的回调嵌套）的困扰<br>2切换线程变得方便<br>3配合Java8的新特性Retrolambda，代码会进一步简洁<br>更深层次的优势是，加深代码的抽象，使得我们更专注于业务逻辑而不是具体实现细节<br>并且事件驱动型的系统可以解耦成多个组件，使代码具有更好的扩展性和容错性</p>
-<p>但是也有一些难处<br>1要用好响应式编程，就得训练好基于流的编程思维，而这与过去有着较大的差异<br>这会导致重构过去的代码难度较大，以及常常会因为思维转变得不纯粹而写出“半成品”<br>2由于Rx库的操作符高度抽象，使用是很方便但深入理解的成本会很高<br>3由于Rx库很抽象，很年轻，使用时会有许多需要留意的坑，加上Retrolambda会带来一些性能上的影响</p>
-<p>但既然是优秀的东西，花些学习成本使用也是值得的</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/posts/uncategorized/2016-01-19-RxJava的个人概述.html" class="archive-article-date">
-  	<time datetime="2016-01-19T07:37:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-HTTP协议笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/posts/uncategorized/2016-01-18-HTTP协议笔记.html">HTTP协议笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- toc -->
-<h1 id="HTTP协议是基于TCP协议的上层应用协议"><a href="#HTTP协议是基于TCP协议的上层应用协议" class="headerlink" title="HTTP协议是基于TCP协议的上层应用协议"></a>HTTP协议是基于TCP协议的上层应用协议</h1><p>特点1无连接：每次连接只处理一个请求，处理完即断开连接<br>特点2无状态：每次连接需要的信息都要重传</p>
-<h1 id="RESTful：一种流行的互联网软件设计架构-含义是资源表现层状态转化，包括三部分"><a href="#RESTful：一种流行的互联网软件设计架构-含义是资源表现层状态转化，包括三部分" class="headerlink" title="RESTful：一种流行的互联网软件设计架构 含义是资源表现层状态转化，包括三部分"></a>RESTful：一种流行的互联网软件设计架构 含义是资源表现层状态转化，包括三部分</h1><ol>
-<li>定义直观简短的资源地址URI （应当是名词，动作放到参数里） </li>
-<li>定义传输的资源：Web服务接受与返回的互联网媒体类型，如JSON，XML等 </li>
-<li>对资源的操作方法：GET获取资源 POST/PUT更新资源 DELETE删除资源</li>
-</ol>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/posts/uncategorized/2016-01-18-HTTP协议笔记.html#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/posts/uncategorized/2016-01-18-HTTP协议笔记.html" class="archive-article-date">
-  	<time datetime="2016-01-18T01:53:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-18</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-  
 
 
       </div>
@@ -682,8 +288,8 @@
 		fancybox: true,
 		mathjax: false,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
